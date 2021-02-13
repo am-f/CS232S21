@@ -1,5 +1,5 @@
 midpoint_original
-  This function will overflow and return an incorrect answer if the sum of the inputs is not within the integer range for a 32-bit two's complement system.  This can only occur when the inputs are of the same sign (both positive or both negative).
+  This function will overflow and return an incorrect answer if the sum of the inputs is not within the integer range for a 32-bit two's complement system, which is [-2147483648, 2147483647].  This can only occur when the inputs are of the same sign (both positive or both negative).
   Examples:
     input x: 2147483647
     input y: 1
