@@ -1,67 +1,92 @@
-If your second input (y) is the minimum integer (-2147483648), having any positive integer as the first input (x) will cause an overflow, because of "y-x" in the equation for the midpoint.  The minimum integer minus any positive integer will lead to overflow.
-Examples:
-  input x: 2147483647
-  input y: -2147483648
-  expected midpoint: -1
-  midpoint_A = 2147483647
+midpoint_original
+  This function will overflow and return an incorrect answer if the sum of the inputs is not within the integer range for a 32-bit two's complement system.  This can only occur when the inputs are of the same sign (both positive or both negative).
+  Examples:
+    input x: 2147483647
+    input y: 1
+    expected midpoint: 1073741824
+    midpoint_original: -1073741824
 
-  input x: 1
-  input y: -2147483648
-  expected midpoint: -1073741824 
-  midpoint_A: 1073741824 
+    input x: -2147483648
+    input y: -1
+    expected midpoint: -1073741825
+    midpoint_original: 1073741823
 
+    input x: 1073741823
+    input y: 1073741825
+    expected midpoint: 1073741824
+    midpoint_original: -1073741824
 
-Also, having the minimum integer as the first input (x) and a non-negative integer as the second input (y) will result in an incorrect answer, also because of "y-x".  This is because the computer does that subtraction as "y+(-x)", so it converts x to the opposite sign.  In 32-bit two's complement, the positive complement of the minimum integer (-2147483648) not within the range, so trying to change to its complement results in the same binary number, which is still negative.  Therefore "y+(-x)" will be negative, and that number divided by 2 will be negative. Since x is the minimum integer, x plus another negative integer will overflow, leading to the wrong answer.
-Examples:
-  input x: -2147483648
-  input y: 2147483647
-  expected midpoint: -1
-  midpoint_A: -2147483648
-  
-  input x: -2147483648
-  input y: 1
-  expected midpoint: -1073741824
-  midpoint_A: 1073741825
-
-  input x: -2147483648
-  input y: 0
-  expected midpoint: -1073741824
-  midpoint_A: 1073741824
+    input x: -1073741823
+    input y: -1073741826
+    expected midpoint: -1073741825
+    midpoint_original:1073741823
 
 
-Expanding from that, if the sum of y and the complement of x is outside of the 32-bit integer range [-2147483648, 2147483647], then midpoint_A will return an incorrect answer.  This would only happen if the inputs have opposite signs (one negative, one positive).
-Examples:
-  input x: 2147483647
-  input y: -2147483647
-  expected midpoint: 0
-  midpoint_A: -2147483648
+midpoint_A
+  If your second input (y) is the minimum integer (-2147483648), having any positive integer as the first input (x) will cause an overflow, because of "y-x" in the equation for the midpoint.  The minimum integer minus any positive integer will lead to overflow.
+  Examples:
+    input x: 2147483647
+    input y: -2147483648
+    expected midpoint: -1
+    midpoint_A = 2147483647
 
-  input x: -2147483647
-  input y: 2147483647
-  expected midpoint: 0
-  midpoint_A: -2147483648
+    input x: 1
+    input y: -2147483648
+    expected midpoint: -1073741824 
+    midpoint_A: 1073741824 
 
-  input x: -2147483647
-  input y: 1
-  expected midpoint: -1073741823
-  midpoint_A: 1073741825
 
-  input x: -2147483645
-  input y: 5
-  expected midpoint: -1073741820
-  midpoint_A: 1073741828
+  Also, having the minimum integer as the first input (x) and a non-negative integer as the second input (y) will result in an incorrect answer, also because of "y-x".  This is because the computer does that subtraction as "y+(-x)", so it converts x to the opposite sign.  In 32-bit two's complement, the positive complement of the minimum integer (-2147483648) not within the range, so trying to change to its complement results in the same binary number, which is still negative.  Therefore "y+(-x)" will be negative, and that number divided by 2 will be negative. Since x is the minimum integer, x plus another negative integer will overflow, leading to the wrong answer.
+  Examples:
+    input x: -2147483648
+    input y: 2147483647
+    expected midpoint: -1
+    midpoint_A: -2147483648
+    
+    input x: -2147483648
+    input y: 1
+    expected midpoint: -1073741824
+    midpoint_A: 1073741825
 
-  input x: 5
-  input y: -2147483647
-  expected midpoint: -1073741821
-  midpoint_A: 1073741827
+    input x: -2147483648
+    input y: 0
+    expected midpoint: -1073741824
+    midpoint_A: 1073741824
 
-  input x: 2147483647
-  input y: -5
-  expected midpoint: 1073741821
-  midpoint_A: -1073741827
 
-  input x: -5
-  input y: 2147483647
-  expected midpoint: 1073741821
-  midpoint_A: -1073741827
+  Expanding from that, if the sum of y and the complement of x is outside of the 32-bit integer range [-2147483648, 2147483647], then midpoint_A will return an incorrect answer.  This would only happen if the inputs have opposite signs (one negative, one positive).
+  Examples:
+    input x: 2147483647
+    input y: -2147483647
+    expected midpoint: 0
+    midpoint_A: -2147483648
+
+    input x: -2147483647
+    input y: 2147483647
+    expected midpoint: 0
+    midpoint_A: -2147483648
+
+    input x: -2147483647
+    input y: 1
+    expected midpoint: -1073741823
+    midpoint_A: 1073741825
+
+    input x: -2147483645
+    input y: 5
+    expected midpoint: -1073741820
+    midpoint_A: 1073741828
+
+    input x: 5
+    input y: -2147483647
+    expected midpoint: -1073741821
+    midpoint_A: 1073741827
+
+    input x: 2147483647
+    input y: -5
+    expected midpoint: 1073741821
+    midpoint_A: -1073741827
+
+    input x: -5
+    input y: 2147483647
+    expected midpoint: 1073741821
+    midpoint_A: -1073741827
