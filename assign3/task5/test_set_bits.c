@@ -59,11 +59,12 @@ int main(int argc,
          const char * argv[]) {
 	unsigned expectedArr[] = {1,0,1,0};
     printf("\nTesting set_bits()\n\n");
-    
-   test_set_bits(0b1001110,2,2,&expectedArr[1],0b1001010); //NO
-    test_set_bits(0b1101101,0,0,&expectedArr[1],0b1101100); //NO
-    /* Works:
+    /*
+   test_set_bits(0b1001110,2,2,&expectedArr[1],0b1001010); //NO 1
+    test_set_bits(0b1101101,0,0,&expectedArr[1],0b1101100); //NO 2
+    //Works:
     test_set_bits(0b1001110,2,2,expectedArr,0b1001110); //works 3
+    
     test_set_bits(0b1101101,0,0,expectedArr,0b1101101); //works 4
     test_set_bits(0b1001110,9,9,&expectedArr[1],0b1001110); //works 5
     test_set_bits(0b1101101,4,4,&expectedArr[1],0b1101101); //works 6

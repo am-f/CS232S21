@@ -8,37 +8,19 @@ void set_bits(unsigned * x,
              unsigned end,
              unsigned *v) {
 
-  unsigned vCopy[sizeof(v)];
-  for(int i = 0; i < sizeof(v); i++) {
+  unsigned vCopy[start-end+1];
+  for(int i = 0; i <= (start-end); i++) {
     vCopy[i] = v[i];
   }
+  printf("%d\n", vCopy[0]);
+  int leadingZero = 1;
+  if(vCopy[0] == 0) { 
+    leadingZero = 0;
+    vCopy[0] = 1; 
+    }
+  printf("%d\n", vCopy[0]);
   
   
-/*
-  unsigned xCopy = *x;
-  unsigned *vCopy = v;
-  unsigned *vFinal = *v;
-  for(int i= 0; i < start; i++) {
-    xCopy = xCopy >> 1;
-  }
-  unsigned revVArray = *v;
-
-  unsigned test;
-  for(int i= 0; i < start; i++) {
-    test = vCopy[0] << 1;
-  }
-  */
-/*
-  for(int i = 0; i <= end - start; i++) {
-      if(v[i] == 1 && (xCopy & 1)) {
-        //
-      }
-      if(v[i] == 1 && !(xCopy & 1)) {
-        xCopy = xCopy + 1;
-      }
-  }
-  */
-
 int vTest = 0;
 int finger = end;
 //int index = 0;
@@ -53,7 +35,12 @@ for(int index = end-start; index >= 0; index--) {
 }
 int bp = 0;
 int test = (*x ^ vTest) + (*x & vTest);
+printf("%d\n", test);
 *x = (*x ^ vTest) + (*x & vTest);
+if(leadingZero == 0) {
+  *x = *x - vCopy[0];
+}
+printf("%d\n", *x);
 
 /*
 for(int i = 0; i < start; i++) {
