@@ -8,6 +8,13 @@ void set_bits(unsigned * x,
              unsigned end,
              unsigned *v) {
 
+  unsigned *vCopy;
+  for(int i = 0; i < (sizeof(*v)/sizeof(v)); i++) {
+    vCopy[i] = v[i];
+  }
+  int test2 = (sizeof(v)/sizeof(*v));
+  
+  
 /*
   unsigned xCopy = *x;
   unsigned *vCopy = v;
@@ -32,20 +39,29 @@ void set_bits(unsigned * x,
       }
   }
   */
+
 int vTest = 0;
-int finger = start;
+int finger = end;
 //int index = 0;
-for(int index = 0; index < end - start + 1; index++) {
-//for(int index = end-start; index >= 0; index--)
-  for(int j = 0; j <= finger; j++) {
+//for(int index = 0; index < end - start + 1; index++) {
+for(int index = end-start; index >= 0; index--) {
+  for(int j = 0; j < finger; j++) {
     v[index] = v[index] << 1;
   }
-  finger++;
+  finger--;
   vTest = vTest + v[index];
   //index++;
 }
 int bp = 0;
-
+int test = (*x ^ vTest) + (*x & vTest);
+*x = (*x ^ vTest) + (*x & vTest);
+printf("%d\n", vCopy);
+/*
+for(int i = 0; i < start; i++) {
+  vTest = vTest << 1;
+}
+bp = 1;
+*/
 /*
   for(int i = start; i <= end; i++ ) {
     if(v[i] == 0) {
@@ -63,13 +79,14 @@ int bp = 0;
     // v points to an array of at least (end-start+1) unsigned integers.
     // if v[i] == 0, then set (i+start)-th bit of x zero, otherwise, set (i+start)-th bit of x one.
 }
-
+/*
 
 int main() {
   //unsigned test = 0b1001110;
   unsigned expectedArr[] = {1,0,1,0};
   unsigned test = 0;
 
-  set_bits(&test,0,3,expectedArr);
+  set_bits(&test,2,5,expectedArr);
   return 0;
 }
+*/
