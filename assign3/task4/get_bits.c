@@ -27,7 +27,11 @@ unsigned * get_bits(unsigned x, unsigned start, unsigned end) {
   }
 
   return bitArray;
-
+    // YOUR CODE HERE
+    // Returning NULL is a placeholder
+    // get_bits dynamically allocates an array a and set a[i] = 1 when (i+start)-th bit
+    // of x is 1, otherwise set a[i] = 0;
+    // At last, get_bits returns the address of the array.
 }
 
 
