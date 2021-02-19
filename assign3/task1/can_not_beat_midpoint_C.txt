@@ -1,0 +1,1 @@
+The XOR bitwise operator (^) find the magnitude of difference between the two inputs.  Doing a bitwise right shift on this value finds half of this magnitude., or what number must be added or subtracted from one of the inputs to reach the other input.

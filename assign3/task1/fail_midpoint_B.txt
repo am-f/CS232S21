@@ -1,0 +1,13 @@
+
+
+In the algorithm, both inputs are converted from 32-bit two's coomplement binary integers to "unsigned int".  This doesn't cause anything to change for positive inputs, since the unsigned binary representation of a positive number is exactly the same as the two's complement representation of that number.  However, if the input is negative, the treating it as an unsigned binary integer means treating it as a very high positive integer, one that's above the range of a 32-bit two's complement integer.
+
+The reason why it's impossible to get a negative midpoint using midpoint_B is because of "unsigned int" in combination with the bitwise right-shift.  In midpoint_B, the two inputs, which are originally 32-bit two's complement integers, are typecast as "unsigned int", then they are added together.  This sum is then shifted right by 1 bit.  However, this is what causes the algorithm to produce the wrong answer.  Because two unsigned integers were added to create the sum, the sum is automatically treated as an unsigned integer.  When a bitwise shift right is performed on an unsigned integer, the leading one is not preserved.  Instead, the missing values are replaced with zeros.
+  Example (4-bit): 
+    unsigned int 0b1010 >> 1 = 0b0101
+    two's complement int 0b1010 >> 1 = 0b1101
+
+This will cause a problem if both inputs are negative, or if only one input is negative but it has a greater magnitude than the non-negative input.  In two's complement, negative numbers have a leading one.  If both of the inputs have a leading one, or if the negative input has a larger magnitude than the positive input, then the sum will have a leading one.  If this sum were a two's complement integer, then a bitwise shift right would preserve the leading one.  However, because the sum is treated as an unsigned integer, then after a bitwise shift right, it has a leading zero.
+
+Because the result of a bitwise right shift on an unsigned int will always have a leading zero, the return value of midpoint_B will always have a leading zero.  A binary integer with a leading zero is positive, both as an unsigned int and a two's complement int, so the resulting midpoint is positive.  This means that midpoint_B can never return a negative midpoint.
+
