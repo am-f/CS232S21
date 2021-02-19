@@ -59,24 +59,26 @@ int main(int argc,
          const char * argv[]) {
 	unsigned expectedArr[] = {1,0,1,0};
     printf("\nTesting set_bits()\n\n");
-    /*
-    test_set_bits(0b1001110,2,2,&expectedArr[1],0b1001010);
-    test_set_bits(0b1101101,0,0,&expectedArr[1],0b1101100);
-    test_set_bits(0b1001110,2,2,expectedArr,0b1001110);
-    test_set_bits(0b1101101,0,0,expectedArr,0b1101101);
-    test_set_bits(0b1001110,9,9,&expectedArr[1],0b1001110);
-    test_set_bits(0b1101101,4,4,&expectedArr[1],0b1101101);
-    test_set_bits(0b1001110,9,9,expectedArr,0b1001001110);
-    test_set_bits(0b1101101,7,7,expectedArr,0b11101101);
+    
+   test_set_bits(0b1001110,2,2,&expectedArr[1],0b1001010); //NO
+    test_set_bits(0b1101101,0,0,&expectedArr[1],0b1101100); //NO
+    /* Works:
+    test_set_bits(0b1001110,2,2,expectedArr,0b1001110); //works 3
+    test_set_bits(0b1101101,0,0,expectedArr,0b1101101); //works 4
+    test_set_bits(0b1001110,9,9,&expectedArr[1],0b1001110); //works 5
+    test_set_bits(0b1101101,4,4,&expectedArr[1],0b1101101); //works 6
+    test_set_bits(0b1001110,9,9,expectedArr,0b1001001110); //works 7
+    test_set_bits(0b1101101,7,7,expectedArr,0b11101101); //works 8
+    */
+    test_set_bits(0b111111,0,3,expectedArr,0b110101); //NO 9
+    test_set_bits(0b111111,2,5,expectedArr,0b010111); //NO 10
+    test_set_bits(0b111111,1,4,expectedArr,0b101011); //NO 11
 
-    test_set_bits(0b111111,0,3,expectedArr,0b110101);
-    test_set_bits(0b111111,2,5,expectedArr,0b010111);
-    test_set_bits(0b111111,1,4,expectedArr,0b101011);
-*/
-    test_set_bits(0,0,3,expectedArr,0b0101);
-    test_set_bits(0,2,5,expectedArr,0b010100);
-    test_set_bits(0,1,4,expectedArr,0b01010);
-
+    /* Works
+    test_set_bits(0,0,3,expectedArr,0b0101); //12
+    test_set_bits(0,2,5,expectedArr,0b010100); //13
+    test_set_bits(0,1,4,expectedArr,0b01010); //14
+    */
     printf("\n");
     return 0;
 }

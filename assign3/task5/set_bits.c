@@ -8,11 +8,10 @@ void set_bits(unsigned * x,
              unsigned end,
              unsigned *v) {
 
-  unsigned *vCopy;
-  for(int i = 0; i < (sizeof(*v)/sizeof(v)); i++) {
+  unsigned vCopy[sizeof(v)];
+  for(int i = 0; i < sizeof(v); i++) {
     vCopy[i] = v[i];
   }
-  int test2 = (sizeof(v)/sizeof(*v));
   
   
 /*
@@ -46,16 +45,16 @@ int finger = end;
 //for(int index = 0; index < end - start + 1; index++) {
 for(int index = end-start; index >= 0; index--) {
   for(int j = 0; j < finger; j++) {
-    v[index] = v[index] << 1;
+    vCopy[index] = vCopy[index] << 1;
   }
   finger--;
-  vTest = vTest + v[index];
+  vTest = vTest + vCopy[index];
   //index++;
 }
 int bp = 0;
 int test = (*x ^ vTest) + (*x & vTest);
 *x = (*x ^ vTest) + (*x & vTest);
-printf("%d\n", vCopy);
+
 /*
 for(int i = 0; i < start; i++) {
   vTest = vTest << 1;
