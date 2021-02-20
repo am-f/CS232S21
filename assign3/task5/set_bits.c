@@ -31,10 +31,14 @@ unsigned int bitMask = 4294967295;
 unsigned int shifts = (end-start) + 1;
 unsigned int vMask = bitMask;
 vMask = vMask << (shifts);
+//printf("vMask d: %u\n", vMask);
+//printf("vMask x: %08x\n", vMask);
 vMask = ~vMask;
+//printf("vMask d: %u\n", vMask);
+//printf("vMask x: %08x\n", vMask);
 vMask = vMask << start;
-printf("vMask d: %u\n", vMask);
-printf("vMask x: %08x\n", vMask);
+//printf("vMask d: %u\n", vMask);
+//printf("vMask x: %08x\n", vMask);
 for(int index = end-start; index >= 0; index--) {
   for(int j = 0; j < finger; j++) {
     vCopy[index] = vCopy[index] << 1;
@@ -49,21 +53,22 @@ for(int i = 0; i < start; i++) {
   vTest = vTest << 1;
 }
 */
-
+/* current
 printf("*x d: %u\n", *x);
 printf("*x x: %08x\n", *x);
 printf("vTest d: %u\n", vTest);
 printf("vTest x: %08x\n", vTest);
-//unsigned int idk = 4294967295;
-//idk = idk >> (32-shifts);
+*/
+*x = ((vMask | *x) ^ vMask) | vTest;
+/*
 *x = (vMask ^ *x) | vTest;
 printf("*x u: %u\n", *x);
 printf("*x u: %08x\n", *x);
-//*x = idk & *x;
-//*x = *x | vTest;
+*/
+/* current
 printf("*x d: %u\n", *x);
 printf("*x x: %08x\n", *x);
-
+*/
 
 
 int bp = 0;
