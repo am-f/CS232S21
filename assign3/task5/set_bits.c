@@ -21,16 +21,19 @@ void set_bits(unsigned * x,
     }
   */
   printf("%d\n", vCopy[0]);
-  
+
   
 int vTest = 0;
 int finger = end;
 //int index = 0;
 //for(int index = 0; index < end - start + 1; index++) {
 unsigned int bitMask = 4294967295;
-int shifts = end-start;
+unsigned int shifts = end+start+1;
 unsigned int vMask = bitMask;
-vMask = vMask >> (32 - shifts);
+vMask = vMask << (shifts);
+vMask = ~vMask;
+printf("vMask d: %u\n", vMask);
+printf("vMask x: %08x\n", vMask);
 for(int index = end-start; index >= 0; index--) {
   for(int j = 0; j < finger; j++) {
     vCopy[index] = vCopy[index] << 1;
@@ -40,11 +43,25 @@ for(int index = end-start; index >= 0; index--) {
   vTest = vTest + vCopy[index];
   //index++;
 }
+/*
+for(int i = 0; i < start; i++) {
+  vTest = vTest << 1;
+}
+*/
+printf("*x d: %u\n", *x);
+printf("*x x: %08x\n", *x);
+printf("vTest d: %u\n", vTest);
+printf("vTest x: %08x\n", vTest);
 //unsigned int idk = 4294967295;
 //idk = idk >> (32-shifts);
-*x = vMask & *x;
+*x = (vMask ^ *x) | vTest;
+printf("*x u: %u\n", *x);
+printf("*x u: %08x\n", *x);
 //*x = idk & *x;
-*x = *x | vTest;
+//*x = *x | vTest;
+printf("*x d: %u\n", *x);
+printf("*x x: %08x\n", *x);
+
 
 
 int bp = 0;
@@ -59,12 +76,10 @@ if(leadingZero == 0) {
 */
 printf("%d\n", *x);
 
-/*
-for(int i = 0; i < start; i++) {
-  vTest = vTest << 1;
-}
+
+
 bp = 1;
-*/
+
 /*
   for(int i = start; i <= end; i++ ) {
     if(v[i] == 0) {
