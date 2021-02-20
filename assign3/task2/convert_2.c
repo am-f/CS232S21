@@ -21,7 +21,7 @@ char* convert_2(int dec)
 
   binString[0] = '0';
   binString[1] = 'b';
-  binString[41] = '\n';
+  binString[41] = '\0';
 
   for(int j = 6; j < 42; j+=5) {
     binString[j] = ' ';
@@ -35,7 +35,6 @@ char* convert_2(int dec)
       }
     }
   }
-
 
   return binString;
 
