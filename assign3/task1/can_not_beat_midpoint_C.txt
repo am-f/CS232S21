@@ -1,133 +1,226 @@
-The XOR bitwise operator (^) finds the magnitude of difference between the two inputs.  Doing a bitwise right shift on this value finds half of this magnitude, which is the number that must be added or subtracted from one of the inputs to reach the other input.
+Here are values that failed for midpoint_A and midpoint_B; none of them fail in midpoint_C.  The step-by-step working for the formula of midpoint_C ((x & y) + ((x ^ y) >> 1) is shown for each input.
 
-However, I'm having a hard time understanding the purpose of (x & y). I know that it returns a number composed of the powers of 2 that x and y share, but I'm not sure how adding this to half of the magnitude of difference between x and y returns the midpoint.  I've spent a really long time trying to figure this out--I even found a PDF of Knuth's book and read through the part where he talks about this, but it all went right over my head.
+midpoint_A failures:
+  These inputs fail midpoint_A because the first input is a positive integer and the second input is the minimum integer, causing an overflow.
+    ~/.../assign3/task1$ ./a.out 2147483647 -2147483648
+      input x: 2147483647
+      input y: -2147483648
+      midpoint_A = 2147483647
+      midpoint_C = -1
+        x =         01111111111111111111111111111111
+        y =         10000000000000000000000000000000
+        x&y =       00000000000000000000000000000000
+        x^y =       11111111111111111111111111111111
+        (x^y)>>1 =  11111111111111111111111111111111
+        midpoint =  11111111111111111111111111111111 
 
-I'm also not sure why we use + instead of |, but when I run it with |, some of the results are different.  A similar problem to midpoint_B occurs, in that the output is incorrect if both inputs are negative, or if there is just one negative input but its magnitude is smaller than the non-negative input (in midpoint_B the problem happened if the negative input's magnitude was larger).
+    ~/.../assign3/task1$ ./a.out 1 -2147483648
+      input x: 1
+      input y: -2147483648
+      midpoint_A = 1073741824
+      midpoint_C = -1073741824
+        x =         00000000000000000000000000000001
+        y =         10000000000000000000000000000000
+        x&y =       00000000000000000000000000000000
+        x^y =       10000000000000000000000000000001
+        (x^y)>>1 =  11000000000000000000000000000000
+        midpoint =  11000000000000000000000000000000
 
+  These inputs fail midpoint_A because the first input is the minimum integer and the second input is. anon-negative integer, which causes an overflow.
+    ~/.../assign3/task1$ ./a.out -2147483648 2147483647
+      input x: -2147483648
+      input y: 2147483647
+      midpoint_A = -2147483648
+      midpoint_C = -1
+        x =         10000000000000000000000000000000
+        y =         01111111111111111111111111111111
+        x&y =       00000000000000000000000000000000
+        x^y =       11111111111111111111111111111111
+        (x^y)>>1 =  11111111111111111111111111111111
+        midpoint =  11111111111111111111111111111111
 
-I reran all the inputs that failed for midpoint_A and midpoint_B (see below) to check that they all work in midpoint_C, which they do.  I'm just still not sure why.
+    ~/.../assign3/task1$ ./a.out -2147483648 1
+      input x: -2147483648
+      input y: 1
+      midpoint_A = 1073741825
+      midpoint_C = -1073741824
+        x =         10000000000000000000000000000000
+        y =         00000000000000000000000000000001
+        x&y =       00000000000000000000000000000000
+        x^y =       10000000000000000000000000000001
+        (x^y)>>1 =  11000000000000000000000000000000
+        midpoint =  11000000000000000000000000000000
+      
+    ~/.../assign3/task1$ ./a.out -2147483648 0
+      input x: -2147483648
+      input y: 0
+      midpoint_A = 1073741824
+      midpoint_C = -1073741824
+        x =         10000000000000000000000000000000
+        y =         00000000000000000000000000000000
+        x&y =       00000000000000000000000000000000
+        x^y =       10000000000000000000000000000000
+        (x^y)>>1 =  11000000000000000000000000000000
+        midpoint =  11000000000000000000000000000000
 
-midpoint_A failures: 
-  ~/.../assign3/task1$ ./a.out 2147483647 -2147483648
-  input x: 2147483647
-  input y: -2147483648
-  midpoint_A = 2147483647
-  midpoint_B = 2147483647
-  midpoint_C = -1
-      (gdb) p/t x
-      $1 = 1111111111111111111111111111111
-      (gdb) p/t y
-      $2 = 10000000000000000000000000000000
-      (gdb) p/t and
-      $3 = 0
-      (gdb) p/t xor
-      $4 = 11111111111111111111111111111111
-      (gdb) p/t xorshift
-      $5 = 11111111111111111111111111111111
-      (gdb) p/t midpoint
-      $6 = 11111111111111111111111111111111  
+  These inputs fail midpoint_A because the sum of the second input and the complement of the first input is outside of the 32-bit integer range.
+    ~/.../assign3/task1$ ./a.out 2147483647 -2147483647
+      input x: 2147483647
+      input y: -2147483647
+      midpoint_A = -2147483648
+      midpoint_C = 0
+        x =         01111111111111111111111111111111
+        y =         10000000000000000000000000000001
+        x&y =       00000000000000000000000000000001
+        x^y =       11111111111111111111111111111110
+        (x^y)>>1 =  11111111111111111111111111111111
+        midpoint =  00000000000000000000000000000000
 
-  ~/.../assign3/task1$ ./a.out 1 -2147483648
-  input x: 1
-  input y: -2147483648
-  midpoint_A = 1073741824
-  midpoint_B = 1073741824
-  midpoint_C = -1073741824
-  ~/.../assign3/task1$ ./a.out -2147483648 2147483647
-  input x: -2147483648
-  input y: 2147483647
-  midpoint_A = -2147483648
-  midpoint_B = 2147483647
-  midpoint_C = -1
-  ~/.../assign3/task1$ ./a.out -2147483648 1
-  input x: -2147483648
-  input y: 1
-  midpoint_A = 1073741825
-  midpoint_B = 1073741824
-  midpoint_C = -1073741824
-  ~/.../assign3/task1$ ./a.out -2147483648 0
-  input x: -2147483648
-  input y: 0
-  midpoint_A = 1073741824
-  midpoint_B = 1073741824
-  midpoint_C = -1073741824
-  ~/.../assign3/task1$ ./a.out 2147483647 -2147483647
-  input x: 2147483647
-  input y: -2147483647
-  midpoint_A = -2147483648
-  midpoint_B = 0
-  midpoint_C = 0
-  ~/.../assign3/task1$ ./a.out -2147483647 2147483647
-  input x: -2147483647
-  input y: 2147483647
-  midpoint_A = -2147483648
-  midpoint_B = 0
-  midpoint_C = 0
-  ~/.../assign3/task1$ ./a.out -2147483647 1
-  input x: -2147483647
-  input y: 1
-  midpoint_A = 1073741825
-  midpoint_B = 1073741825
-  midpoint_C = -1073741823
-  ~/.../assign3/task1$ ./a.out -2147483645 5
-  input x: -2147483645
-  input y: 5
-  midpoint_A = 1073741828
-  midpoint_B = 1073741828
-  midpoint_C = -1073741820
-  ~/.../assign3/task1$ ./a.out 5 -2147483647
-  input x: 5
-  input y: -2147483647
-  midpoint_A = 1073741827
-  midpoint_B = 1073741827
-  midpoint_C = -1073741821
-  ~/.../assign3/task1$ ./a.out 2147483647 -5
-  input x: 2147483647
-  input y: -5
-  midpoint_A = -1073741827
-  midpoint_B = 1073741821
-  midpoint_C = 1073741821
-  ~/.../assign3/task1$ ./a.out -5 2147483647
-    input x: -5
-    input y: 2147483647
-    midpoint_A = -1073741827
-    midpoint_B = 1073741821
-    midpoint_C = 1073741821
+    ~/.../assign3/task1$ ./a.out -2147483647 2147483647
+      input x: -2147483647
+      input y: 2147483647
+      midpoint_A = -2147483648
+      midpoint_C = 0
+        x =         10000000000000000000000000000001
+        y =         01111111111111111111111111111111
+        x&y =       00000000000000000000000000000001
+        x^y =       11111111111111111111111111111110
+        (x^y)>>1 =  11111111111111111111111111111111
+        midpoint =  00000000000000000000000000000000
+
+    ~/.../assign3/task1$ ./a.out -2147483647 1
+      input x: -2147483647
+      input y: 1
+      midpoint_A = 1073741825
+      midpoint_C = -1073741823
+        x =         10000000000000000000000000000001
+        y =         00000000000000000000000000000001
+        x&y =       00000000000000000000000000000001
+        x^y =       10000000000000000000000000000000
+        (x^y)>>1 =  11000000000000000000000000000000
+        midpoint =  11000000000000000000000000000001
+
+    ~/.../assign3/task1$ ./a.out -2147483645 5
+      input x: -2147483645
+      input y: 5
+      midpoint_A = 1073741828
+      midpoint_C = -1073741820
+        x =         10000000000000000000000000000011
+        y =         00000000000000000000000000000101
+        x&y =       00000000000000000000000000000001
+        x^y =       10000000000000000000000000000110
+        (x^y)>>1 =  11000000000000000000000000000011
+        midpoint =  11000000000000000000000000000100
+      
+    ~/.../assign3/task1$ ./a.out 5 -2147483645
+      input x: 5
+      input y: -2147483645
+      midpoint_A = 1073741827
+      midpoint_C = -1073741820
+        x =         00000000000000000000000000000101
+        y =         10000000000000000000000000000011
+        x&y =       00000000000000000000000000000001
+        x^y =       10000000000000000000000000000110
+        (x^y)>>1 =  11000000000000000000000000000011
+        midpoint =  11000000000000000000000000000100
+          
+    ~/.../assign3/task1$ ./a.out 2147483647 -5
+      input x: 2147483647
+      input y: -5
+      midpoint_A = -1073741827
+      midpoint_C = 1073741821
+        x =         01111111111111111111111111111111
+        y =         11111111111111111111111111111011
+        x&y =       01111111111111111111111111111011
+        x^y =       10000000000000000000000000000100
+        (x^y)>>1 =  11000000000000000000000000000010
+        midpoint =  00111111111111111111111111111101
+
+    ~/.../assign3/task1$ ./a.out -5 2147483647
+      input x: -5
+      input y: 2147483647
+      midpoint_A = -1073741827
+      midpoint_C = 1073741821
+        x =         11111111111111111111111111111011
+        y =         01111111111111111111111111111111
+        x&y =       01111111111111111111111111111011
+        x^y =       10000000000000000000000000000100
+        (x^y)>>1 =  11000000000000000000000000000010
+        midpoint =  00111111111111111111111111111101
+      
+
 
 midpoint_B failures:
-  ~/.../assign3/task1$ ./a.out -10 5
-    input x: -10
-    input y: 5
-    midpoint_A = -3
-    midpoint_B = 2147483645
-    midpoint_C = -3
-  ~/.../assign3/task1$ ./a.out -10 -20
-    input x: -10
-    input y: -20
-    midpoint_A = -15
-    midpoint_B = 2147483633
-    midpoint_C = -15
-  ~/.../assign3/task1$ ./a.out -2147483648 2147483647
-    input x: -2147483648
-    input y: 2147483647
-    midpoint_A = -2147483648
-    midpoint_B = 2147483647
-    midpoint_C = -1
-  ~/.../assign3/task1$ ./a.out -2147483648 -1
-    input x: -2147483648
-    input y: -1
-    midpoint_A = -1073741825
-    midpoint_B = 1073741823
-    midpoint_C = -1073741825
-  ~/.../assign3/task1$ ./a.out -2147483648 0
-    input x: -2147483648
-    input y: 0
-    midpoint_A = 1073741824
-    midpoint_B = 1073741824
-    midpoint_C = -1073741824
-  ~/.../assign3/task1$ ./a.out -2147483648 1
-    input x: -2147483648
-    input y: 1
-    midpoint_A = 1073741825
-    midpoint_B = 1073741824
-    midpoint_C = -1073741824
+  These inputs fail midpoint_B if both of the inputs are negative or if only one input is negative but it has a greater magnitude than the non-negative input, because the bitwise shift doesn't preserve the leading one. 
+    ~/.../assign3/task1$ ./a.out -10 5
+      input x: -10
+      input y: 5
+      midpoint_B = 2147483645
+      midpoint_C = -3
+        x =         11111111111111111111111111110110
+        y =         00000000000000000000000000000101
+        x&y =       00000000000000000000000000000100
+        x^y =       11111111111111111111111111110011
+        (x^y)>>1 =  11111111111111111111111111111001
+        midpoint =  11111111111111111111111111111101
+
+    ~/.../assign3/task1$ ./a.out -10 -20
+      input x: -10
+      input y: -20
+      midpoint_B = 2147483633
+      midpoint_C = -15
+        x =         11111111111111111111111111110110
+        y =         11111111111111111111111111101100
+        x&y =       11111111111111111111111111100100
+        x^y =       00000000000000000000000000011010
+        (x^y)>>1 =  00000000000000000000000000001101
+        midpoint =  11111111111111111111111111110001
+
+    ~/.../assign3/task1$ ./a.out -2147483648 2147483647
+      input x: -2147483648
+      input y: 2147483647
+      midpoint_B = 2147483647
+      midpoint_C = -1
+        x =         10000000000000000000000000000000
+        y =         01111111111111111111111111111111
+        x&y =       00000000000000000000000000000000
+        x^y =       11111111111111111111111111111111
+        (x^y)>>1 =  11111111111111111111111111111111
+        midpoint =  11111111111111111111111111111111
+
+    ~/.../assign3/task1$ ./a.out -2147483648 -1
+      input x: -2147483648
+      input y: -1
+      midpoint_B = 1073741823
+      midpoint_C = -1073741825
+        x =         10000000000000000000000000000000
+        y =         11111111111111111111111111111111
+        x&y =       10000000000000000000000000000000
+        x^y =       01111111111111111111111111111111
+        (x^y)>>1 =  00111111111111111111111111111111
+        midpoint =  10111111111111111111111111111111
+
+    ~/.../assign3/task1$ ./a.out -2147483648 0
+      input x: -2147483648
+      input y: 0
+      midpoint_B = 1073741824
+      midpoint_C = -1073741824
+        x =         10000000000000000000000000000000
+        y =         00000000000000000000000000000000
+        x&y =       00000000000000000000000000000000
+        x^y =       10000000000000000000000000000000
+        (x^y)>>1 =  11000000000000000000000000000000
+        midpoint =  11000000000000000000000000000000
+
+    ~/.../assign3/task1$ ./a.out -2147483648 1
+      input x: -2147483648
+      input y: 1
+      midpoint_B = 1073741824
+      midpoint_C = -1073741824
+        x =         10000000000000000000000000000000
+        y =         00000000000000000000000000000001
+        x&y =       00000000000000000000000000000000
+        x^y =       10000000000000000000000000000001
+        (x^y)>>1 =  11000000000000000000000000000000
+        midpoint =  11000000000000000000000000000000
+      

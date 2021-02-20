@@ -39,10 +39,11 @@ int midpoint_Or(int x, int y) {
   //return (x & y) | ((x ^ y) >> 1);
 }
 
-int main(int argc, char ** argv) {
-    int a = atoi(argv[1]); //atoi converts string to int
-    int b = atoi(argv[2]);
+int main(/*int argc, char ** argv*/) {
+    //int a = atoi(argv[1]); //atoi converts string to int
+    //int b = atoi(argv[2]);
     //printf("midpoint_original = %d\n", midpoint_original(a, b));
+    /*
     printf("\nfail A:\n");
     midpoint_C(2147483647, -2147483648);
     midpoint_C(1, -2147483648);
@@ -56,12 +57,22 @@ int main(int argc, char ** argv) {
     midpoint_C(5, -2147483645);
     midpoint_C(2147483647, -5);
     midpoint_C(-5, 2147483647);
+    */
+
+    printf("\nfail B:\n");
+    midpoint_C(-10, 5);
+    midpoint_C(-10,-20);
+    midpoint_C(-2147483648, 2147483647);
+    midpoint_C(-2147483648, -1);
+    midpoint_C(-2147483648, 0);
+    midpoint_C(-2147483648, 1);
+    
 
 
 
 
 
-    printf("%d", midpoint_C(a, b));
+    //printf("%d", midpoint_C(a, b));
     //printf("input x: %d\n", a);
     //printf("input y: %d\n", b);
     //printf("midpoint_A = %d\n", midpoint_A(a, b)); 
