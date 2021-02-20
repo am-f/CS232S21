@@ -11,3 +11,40 @@ This will cause a problem if both inputs are negative, or if only one input is n
 
 Because the result of a bitwise right shift on an unsigned int will always have a leading zero, the return value of midpoint_B will always have a leading zero.  A binary integer with a leading zero is positive, both as an unsigned int and a two's complement int, so the resulting midpoint is positive.  This means that midpoint_B can never return a negative midpoint.
 
+Here are some examples of midpoint_B failures:
+  ~/.../assign3/task1$ ./a.out -10 5
+      input x: -10
+      input y: 5
+      midpoint_A = -3
+      midpoint_B = 2147483645
+      midpoint_C = -3
+  ~/.../assign3/task1$ ./a.out -10 -20
+      input x: -10
+      input y: -20
+      midpoint_A = -15
+      midpoint_B = 2147483633
+      midpoint_C = -15
+  ~/.../assign3/task1$ ./a.out -2147483648 2147483647
+      input x: -2147483648
+      input y: 2147483647
+      midpoint_A = -2147483648
+      midpoint_B = 2147483647
+      midpoint_C = -1
+  ~/.../assign3/task1$ ./a.out -2147483648 -1
+      input x: -2147483648
+      input y: -1
+      midpoint_A = -1073741825
+      midpoint_B = 1073741823
+      midpoint_C = -1073741825
+  ~/.../assign3/task1$ ./a.out -2147483648 0
+      input x: -2147483648
+      input y: 0
+      midpoint_A = 1073741824
+      midpoint_B = 1073741824
+      midpoint_C = -1073741824
+  ~/.../assign3/task1$ ./a.out -2147483648 1
+    input x: -2147483648
+      input y: 1
+      midpoint_A = 1073741825
+      midpoint_B = 1073741824
+      midpoint_C = -1073741824

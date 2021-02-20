@@ -1,1 +1,120 @@
-The XOR bitwise operator (^) find the magnitude of difference between the two inputs.  Doing a bitwise right shift on this value finds half of this magnitude., or what number must be added or subtracted from one of the inputs to reach the other input.
+The XOR bitwise operator (^) finds the magnitude of difference between the two inputs.  Doing a bitwise right shift on this value finds half of this magnitude, which is the number that must be added or subtracted from one of the inputs to reach the other input.
+
+However, I'm having a hard time understanding the purpose of (x & y). I know that it returns a number composed of the powers of 2 that x and y share, but I'm not sure how adding this to half of the magnitude of difference between x and y returns the midpoint.
+
+I'm not sure why we use + instead of |, but when I run it with |, some of the results are different.  A similar problem to midpoint_B occurs, in that the output is incorrect if both inputs are negative, or if there is just one negative input but its magnitude is smaller than the non-negative input (in midpoint_B the problem happened if the negative input's magnitude was larger).
+
+
+I reran all the inputs that failed for midpoint_A and midpoint_B (see below) to check that they all work in midpoint_C, which they do.  I'm just still not sure why.
+
+midpoint_A failures: 
+  ~/.../assign3/task1$ ./a.out 2147483647 -2147483648
+  input x: 2147483647
+  input y: -2147483648
+  midpoint_A = 2147483647
+  midpoint_B = 2147483647
+  midpoint_C = -1
+  ~/.../assign3/task1$ ./a.out 1 -2147483648
+  input x: 1
+  input y: -2147483648
+  midpoint_A = 1073741824
+  midpoint_B = 1073741824
+  midpoint_C = -1073741824
+  ~/.../assign3/task1$ ./a.out -2147483648 2147483647
+  input x: -2147483648
+  input y: 2147483647
+  midpoint_A = -2147483648
+  midpoint_B = 2147483647
+  midpoint_C = -1
+  ~/.../assign3/task1$ ./a.out -2147483648 1
+  input x: -2147483648
+  input y: 1
+  midpoint_A = 1073741825
+  midpoint_B = 1073741824
+  midpoint_C = -1073741824
+  ~/.../assign3/task1$ ./a.out -2147483648 0
+  input x: -2147483648
+  input y: 0
+  midpoint_A = 1073741824
+  midpoint_B = 1073741824
+  midpoint_C = -1073741824
+  ~/.../assign3/task1$ ./a.out 2147483647 -2147483647
+  input x: 2147483647
+  input y: -2147483647
+  midpoint_A = -2147483648
+  midpoint_B = 0
+  midpoint_C = 0
+  ~/.../assign3/task1$ ./a.out -2147483647 2147483647
+  input x: -2147483647
+  input y: 2147483647
+  midpoint_A = -2147483648
+  midpoint_B = 0
+  midpoint_C = 0
+  ~/.../assign3/task1$ ./a.out -2147483647 1
+  input x: -2147483647
+  input y: 1
+  midpoint_A = 1073741825
+  midpoint_B = 1073741825
+  midpoint_C = -1073741823
+  ~/.../assign3/task1$ ./a.out -2147483645 5
+  input x: -2147483645
+  input y: 5
+  midpoint_A = 1073741828
+  midpoint_B = 1073741828
+  midpoint_C = -1073741820
+  ~/.../assign3/task1$ ./a.out 5 -2147483647
+  input x: 5
+  input y: -2147483647
+  midpoint_A = 1073741827
+  midpoint_B = 1073741827
+  midpoint_C = -1073741821
+  ~/.../assign3/task1$ ./a.out 2147483647 -5
+  input x: 2147483647
+  input y: -5
+  midpoint_A = -1073741827
+  midpoint_B = 1073741821
+  midpoint_C = 1073741821
+  ~/.../assign3/task1$ ./a.out -5 2147483647
+    input x: -5
+    input y: 2147483647
+    midpoint_A = -1073741827
+    midpoint_B = 1073741821
+    midpoint_C = 1073741821
+
+midpoint_B failures:
+  ~/.../assign3/task1$ ./a.out -10 5
+    input x: -10
+    input y: 5
+    midpoint_A = -3
+    midpoint_B = 2147483645
+    midpoint_C = -3
+  ~/.../assign3/task1$ ./a.out -10 -20
+    input x: -10
+    input y: -20
+    midpoint_A = -15
+    midpoint_B = 2147483633
+    midpoint_C = -15
+  ~/.../assign3/task1$ ./a.out -2147483648 2147483647
+    input x: -2147483648
+    input y: 2147483647
+    midpoint_A = -2147483648
+    midpoint_B = 2147483647
+    midpoint_C = -1
+  ~/.../assign3/task1$ ./a.out -2147483648 -1
+    input x: -2147483648
+    input y: -1
+    midpoint_A = -1073741825
+    midpoint_B = 1073741823
+    midpoint_C = -1073741825
+  ~/.../assign3/task1$ ./a.out -2147483648 0
+    input x: -2147483648
+    input y: 0
+    midpoint_A = 1073741824
+    midpoint_B = 1073741824
+    midpoint_C = -1073741824
+  ~/.../assign3/task1$ ./a.out -2147483648 1
+    input x: -2147483648
+    input y: 1
+    midpoint_A = 1073741825
+    midpoint_B = 1073741824
+    midpoint_C = -1073741824
