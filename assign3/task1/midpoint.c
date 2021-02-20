@@ -31,6 +31,8 @@ int midpoint_Or(int x, int y) {
   int and = x & y;
   int xor = x ^ y;
   int xorshift = xor >> 1;
+  int midpoint = (and | xorshift);
+  int b = 0;
   return (and | xorshift);
   //return (x & y) | ((x ^ y) >> 1);
 }
@@ -39,13 +41,13 @@ int main(int argc, char ** argv) {
     int a = atoi(argv[1]); //atoi converts string to int
     int b = atoi(argv[2]);
     //printf("midpoint_original = %d\n", midpoint_original(a, b));
+    printf("%d", midpoint_C(a, b));
+    //printf("input x: %d\n", a);
+    //printf("input y: %d\n", b);
+    //printf("midpoint_A = %d\n", midpoint_A(a, b)); 
+    //printf("midpoint_B = %d\n", midpoint_B(a, b)); 
 
-    printf("input x: %d\n", a);
-    printf("input y: %d\n", b);
-    printf("midpoint_A = %d\n", midpoint_A(a, b)); 
-    printf("midpoint_B = %d\n", midpoint_B(a, b)); 
-
-    printf("midpoint_C = %d\n", midpoint_C(a, b));
+    //printf("midpoint_C = %d\n", midpoint_C(a, b));
     //printf("midpoint_Or = %d\n", midpoint_Or(a, b));
     return 0;
 }
