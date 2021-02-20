@@ -27,7 +27,7 @@ int midpoint_C(int x, int y) {
   int xor = x ^ y;
   int xorshift = xor >> 1;
   int midpoint = (and + xorshift);
-  int br = 0;
+  printf("\n\n");
   return and + xorshift;
   //return (x & y) + ((x ^ y) >> 1);
 }
@@ -51,7 +51,11 @@ int main(int argc, char ** argv) {
     midpoint_C(-2147483648, 0);
     midpoint_C(2147483647, -2147483647);
     midpoint_C(-2147483647, 2147483647);
-    
+    midpoint_C(-2147483647, 1);
+    midpoint_C(-2147483645, 5);
+    midpoint_C(5, -2147483645);
+    midpoint_C(2147483647, -5);
+    midpoint_C(-5, 2147483647);
 
 
 
