@@ -1,8 +1,8 @@
 The XOR bitwise operator (^) finds the magnitude of difference between the two inputs.  Doing a bitwise right shift on this value finds half of this magnitude, which is the number that must be added or subtracted from one of the inputs to reach the other input.
 
-However, I'm having a hard time understanding the purpose of (x & y). I know that it returns a number composed of the powers of 2 that x and y share, but I'm not sure how adding this to half of the magnitude of difference between x and y returns the midpoint.
+However, I'm having a hard time understanding the purpose of (x & y). I know that it returns a number composed of the powers of 2 that x and y share, but I'm not sure how adding this to half of the magnitude of difference between x and y returns the midpoint.  I've spent a really long time trying to figure this out--I even found a PDF of Knuth's book and read through the part where he talks about this, but it all went right over my head.
 
-I'm not sure why we use + instead of |, but when I run it with |, some of the results are different.  A similar problem to midpoint_B occurs, in that the output is incorrect if both inputs are negative, or if there is just one negative input but its magnitude is smaller than the non-negative input (in midpoint_B the problem happened if the negative input's magnitude was larger).
+I'm also not sure why we use + instead of |, but when I run it with |, some of the results are different.  A similar problem to midpoint_B occurs, in that the output is incorrect if both inputs are negative, or if there is just one negative input but its magnitude is smaller than the non-negative input (in midpoint_B the problem happened if the negative input's magnitude was larger).
 
 
 I reran all the inputs that failed for midpoint_A and midpoint_B (see below) to check that they all work in midpoint_C, which they do.  I'm just still not sure why.

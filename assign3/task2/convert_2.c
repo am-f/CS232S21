@@ -6,36 +6,39 @@
 //2) No globals allowed.
 char* convert_2(int dec)
 {
-	char *binString= (char *)malloc(42 * sizeof(char));
-  char rawBinArr[42];
-  int workingBin = dec;
+	char *binString= (char *)malloc(42);
+  char binArr[32];
+
   for (int i = 31; i >= 0; i--) {
-    if(workingBin & 1) {
-      rawBinArr[i] = '1';
+    if(dec & 1) {
+      binArr[i] = '1';
     }
     else {
-      rawBinArr[i] = '0';
+      binArr[i] = '0';
     }
-    workingBin = workingBin >> 1;
+    dec = dec >> 1;
   }
+
   binString[0] = '0';
   binString[1] = 'b';
+  binString[41] = '\n';
 
   for(int j = 6; j < 42; j+=5) {
     binString[j] = ' ';
   }
 
-  int i = 0;
-  while(i < 32) {
-    for(int j = 2; j < 42; j++) {
+  for(int i = 0; i < 32; ) {
+    for(int j = 2; j < 41; j++) {
       if(binString[j] != ' ') {
-        binString[j] = rawBinArr[i];
+        binString[j] = binArr[i];
         i++;
       }
     }
   }
 
+
   return binString;
+
 }
 
 int main() {

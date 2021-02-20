@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 int * makearray(int size,int base){
-
+/*Explanation: The memory violation occurred because the array was statically allocated in the makearray function, meaning that, once the function was done running, there wasn't a way to access the array anymore.  The function returned the address of the local array to main, but main can only access things that are global, allocated in the heap, or in main--it can't access the local array whose address makearray returns. 
+*/
   int * array = (int *)malloc(size * sizeof(int));
   int j;
 
