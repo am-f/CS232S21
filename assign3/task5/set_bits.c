@@ -28,10 +28,11 @@ int finger = end;
 //int index = 0;
 //for(int index = 0; index < end - start + 1; index++) {
 unsigned int bitMask = 4294967295;
-unsigned int shifts = end+start+1;
+unsigned int shifts = (end-start) + 1;
 unsigned int vMask = bitMask;
 vMask = vMask << (shifts);
 vMask = ~vMask;
+vMask = vMask << start;
 printf("vMask d: %u\n", vMask);
 printf("vMask x: %08x\n", vMask);
 for(int index = end-start; index >= 0; index--) {
@@ -48,6 +49,7 @@ for(int i = 0; i < start; i++) {
   vTest = vTest << 1;
 }
 */
+
 printf("*x d: %u\n", *x);
 printf("*x x: %08x\n", *x);
 printf("vTest d: %u\n", vTest);
