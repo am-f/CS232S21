@@ -3,17 +3,22 @@
 #include<string.h>
 
 struct student {
-	char name[20];
+	char * name;
 	int id;
 };
 
 struct student * student_allocator(char * name, int id) {
 	struct student * p_stu = (struct student*) malloc(sizeof(struct student));
+  p_stu->name = (char *) malloc(sizeof(char)* (strlen(name)+1));
 	strcpy(p_stu->name, name);
-	p_stu->id = id;	
+	p_stu->id = id;
+  return p_stu;	
+  
 }
 
+
 void student_deallocator(struct student *p_stu) {
+  free(p_stu->name);
 	free(p_stu);
 }
 
