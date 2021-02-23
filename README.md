@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-CS232 Spring 2021
- 
-=======
 # CS232: Computer Organizations
 [Pace University](http://www.pace.edu)
 
@@ -57,6 +53,3 @@ Week|Content|Recording|Reading|Recitation|Deadline
   
 # Hands-out
 
-
-
->>>>>>> 7884833bf2aa579ca63774fc017030727cad80ce
