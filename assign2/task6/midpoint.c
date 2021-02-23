@@ -23,8 +23,6 @@ int midpoint_C(int x, int y) {
     return returnV;
 }
 
-
-
 int main(int argc, char ** argv) {
     int a = atoi(argv[1]); //atoi converts string to int
     int b = atoi(argv[2]);

@@ -6,6 +6,7 @@
 //2) No globals allowed.
 char* convert_2(int dec)
 {
+
 	char *binString= (char *)malloc(42);
   char binArr[32];
 
@@ -38,6 +39,7 @@ char* convert_2(int dec)
 
   return binString;
 
+
 }
 
 int main() {
@@ -48,5 +50,7 @@ int main() {
 	bin = convert_2(n);
 	printf("The Binary Notation of %d is\t %s\n", n, bin);
 	//TODO: do we need to release the memory of bin?
+
   free(bin);
+
 }

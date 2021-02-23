@@ -26,6 +26,4 @@ int main() {
   assert(random_sort_test == 0);
   
   return 0;
-
 }
-

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 int get_valid_number();
+
 int is_prime(int x);
 
 //main() uses a sentinel controlled loop to test the primality of numbers
@@ -10,7 +11,9 @@ int is_prime(int x);
 int main()
 {
 	int n;
+
   n = get_valid_number(); //read
+
 	while (n!=-1) { //test
 		//process
 		if (is_prime(n)) {
@@ -25,6 +28,7 @@ int main()
 	}
 	return 0;
 }
+
 
 int is_prime(int n) {
 	//if n is divisible by any number greater or equal to 2 and less than n, then n is not prime.
