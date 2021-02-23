@@ -81,6 +81,7 @@ void strlen_vs_sizeof() {
          (int) sizeof(s),    //the memory size of a pointer
          (int) sizeof(*s)    //the memory size of a char
          );
+    printf("strlen(str2): %d\n", sizeof(str2));
 
 }
 /* ----------------------------------------------------------------------------
