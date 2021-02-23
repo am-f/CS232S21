@@ -101,12 +101,16 @@ void pointer_math() {
     printf("a[3]:%d str[3]:%c\n", *(a+3),*(str+3));
     // I know you would not know what the actual addresses are, just comment
     // what you think (a+3-a) and (str+3-str) are.
+    //a[3]: 3, str[3]: l
     printf("a=%p a+3=%p (a+3-a)=%ld\n",a,a+3, ((long) (a+3)) - (long) a);
+    //a+3-a=12
     printf("str=%p str+3=%p (str+3-str)=%ld\n",str,str+3, ((long) (str+3)) - (long) str);
+    //str+3-str=3
+    
 }
 // ----------------------------------------------------------------------------
 
-void pointer_casting() {
+void pointer_casting() { //Don't understand this!!!
     char s[4]; 
     s[0] = 254;
     s[1] = 255;
@@ -140,13 +144,14 @@ void simple_double_array() {
     printf("*(*(darray+3)+2) = %d\n", *(*(darray+3)+2));
 }
 // ----------------------------------------------------------------------------
-void string_double_array_pointer_array() {
+void string_double_array_pointer_array() { //
     //these are two strings
     char str1[] = "This is a locust tree"; //str1 is a statically alloc-ed array
     char * str2 = "This is also a locust tree"; //str2 is a pointer to char
 
     printf("str1:%p\n",str1);
     printf("str2:%p\n",str2); //which is at the higer address? why?
+    //str1 is at higher address b/c str2 points to a char that's in the code, and the code is at the very bottom (lowest indices) of the stack
                               //check the memory layout of your process 
                               //what lays at the bottom?
     //this is an array of strings, each string is a char *	
@@ -218,7 +223,7 @@ static void foo(stuff_t value)
 
 static void bar(stuff_t *value)
 {
-    value->a = 4;
+    *(value->a) = 4; //I made this change myself, otherwise there was a segmentation fault
     value->b = 5;
 }
 

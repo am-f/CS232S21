@@ -29,10 +29,25 @@ mytype_t ** allocate(int n){
 void deallocate(mytype_t ** mytypes){
 
   /*Complete me*/
+  for(int i = (sizeof(mytypes)) + 1; i >= 0; i--) {
+    /*
+    for(int j = mytypes[i]->size; j > 0; j--) {
+      free(mytypes[i]->a[j]);
+    }
+    */
+    free(mytypes[i]->a);
+    //free(mytypes[i]->size);
+    free(mytypes[i]);
+
+  }
+  free(mytypes);
+//free(*mytypes);
+  /*
  for(i 0 to n-1) {
     free(mytypes[i]->a);
     free(mytypes[i]);
  } 
+ */
 }
 
 int main(){
@@ -43,7 +58,7 @@ int main(){
 
 
   for(i=0;i<10;i++){
-    printf("mytpyes[%d] = [",i);
+    printf("mytypes[%d] = [",i);
     for(j=0;j<mytypes[i]->size;j++){
       printf(" %d", mytypes[i]->a[j]);
     }
