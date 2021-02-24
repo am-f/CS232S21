@@ -152,8 +152,8 @@ void string_double_array_pointer_array() { //
     printf("str1:%p\n",str1);
     printf("str2:%p\n",str2); //which is at the higer address? why?
     //str1 is at higher address b/c str2 points to a char that's in the code, and the code is at the very bottom (lowest indices) of the stack
-                              //check the memory layout of your process 
-                              //what lays at the bottom?
+       //check the memory layout of your process 
+       //what lays at the bottom?
     //this is an array of strings, each string is a char *	
     char * strings[]={"Go Pace!",
                      "Beat CUNY!",

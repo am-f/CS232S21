@@ -2,16 +2,20 @@
 
 #include <stdio.h>  /* Need for standard I/O functions */
 #include <string.h> /* Need for strlen() */
+#include <stdlib.h>
 
 
-#define NUM 30   /* number of strings */
+#define NUM 2   /* number of strings */
 #define LEN 1200  /* max length of each string */
 
 int main()
 {
   char * Strings[NUM];
-
-  printf("Please enter %d strings, one per line:\n", NUM);
+  //char bufferString[LEN];
+  char bufferString[LEN];
+  //char * stringPointer;
+  //stringPointer = Strings[0];
+  char ch = 'a';
 
   /* Write a for loop here to read NUM strings.
 
@@ -22,12 +26,62 @@ int main()
 	 be LEN bytes long.  
 	 Note that the newline and NULL characters will be included in LEN.
   */
-
-  puts("\nHere are the strings in the order you entered:");
+  printf("Please enter %d strings, one per line:\n", NUM);
+  for(int i = 0; i < NUM; i++) {
+    //fgets(*(Strings+i), LEN, stdin);
+    fgets(bufferString, LEN, stdin);
+    char * stringPointer = (char *)malloc(strlen(bufferString));
+    //stringPointer = (char *)malloc(strlen(bufferString));
+    int j = 0;
+    for(j = 0; j < strlen(bufferString)-1; j++) {
+      stringPointer[j] = bufferString[j];
+    }
+    stringPointer[j] = '\0';
+    //printf("strlen: %lu\n", strlen(stringPointer));
+    Strings[i] = stringPointer;
+  }
 
   /* Write a for loop here to print all the strings. */
-
+  puts("\nHere are the strings in the order you entered:");
+  for(int i = 0; i < NUM; i++) {
+    printf("%s\n", *(Strings+i));
+    //printf("sizeof: %d\n", sizeof(*(Strings+i)));
+  }
   
+  void swap(char * str1, char * str2) {
+    int strlen1 = strlen(str1);
+    int strlen2 = strlen(str2);
+    int len1mlen2 = strlen1 - strlen2;
+    int longestLen;
+    char * temp;
+    if(len1mlen2 >= 0) { 
+      longestLen = strlen1;
+      temp = (char *)malloc(strlen1);
+    }
+    else {
+      longestLen = strlen2;
+      temp = (char *)malloc(strlen2);
+    }
+
+    for(int i = 0; i < longestLen; i++) {
+      *(temp + i) = *(str1 + i);
+      *(str1 + i) = *(str2 + i);
+      *(str2 + i) = *(temp + i);
+    }
+
+    free(temp);
+  }
+
+  void testSwap() {
+    char str1[] = {"abcd"};
+    //char * pstr1 = str1;
+    char str2[] = "xyz";
+    //char * pstr2 = str2;
+    printf("1: %s\n2: %s\n", str1, str2);
+    swap(str1, str2);
+    printf("1: %s\n2: %s\n", str1, str2);
+  }
+  testSwap();
   /* Bubble sort */
   /* Write code here to bubble sort the strings in ascending alphabetical order
 
