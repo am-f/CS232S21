@@ -16,10 +16,12 @@ void swap(char * str1, char * str2) {
     char * temp;
     if(len1mlen2 >= 0) { 
       longestLen = strlen1;
+      shortestLen = strlen2;
       temp = (char *)malloc(strlen1);
     }
     else {
       longestLen = strlen2;
+      shortestLen = strlen1;
       temp = (char *)malloc(strlen2);
     }
 
@@ -27,8 +29,9 @@ void swap(char * str1, char * str2) {
       *(temp + i) = *(str1 + i);
       *(str1 + i) = *(str2 + i);
       *(str2 + i) = *(temp + i);
-    }
 
+    }
+  
     free(temp);
 }
 
@@ -85,7 +88,7 @@ int mystrcmp(char * str1, char * str2) {
 }
 
 void bubbleSort(char ** strings) {
-  int swapped = 0;
+  //int swapped = 0;
   for(int i = 0; i < NUM; i++) {
     //swapped = 0;
     for(int j = 0; j < NUM -1 - i; j++) {
@@ -143,7 +146,8 @@ int main()
   /* Write a for loop here to print all the strings. */
   puts("\nHere are the strings in the order you entered:");
   for(int i = 0; i < NUM; i++) {
-    printf("%s\n", *(Strings+i));
+    puts(*(Strings+i));
+    //printf("%s\n", *(Strings+i));
     //printf("sizeof: %d\n", sizeof(*(Strings+i)));
   }
   bubbleSort(Strings);
@@ -190,12 +194,14 @@ int main()
      etc. for printing each string.
   */
   for(int i = 0; i < NUM; i++) {
-    printf("%s\n", *(Strings+i));
+    //printf("%s\n", *(Strings+i));
+    puts(*(Strings+i));
     //printf("sizeof: %d\n", sizeof(*(Strings+i)));
   }
   printf("\n");
   for(int i = 0; i < NUM; i++) {
     free(*(Strings+i));
   }
+
 
 }
