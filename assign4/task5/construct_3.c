@@ -7,33 +7,28 @@ typedef struct node {
 
 node_t * construct_3() {
 
-    node_t *x;
-    node_t *y;
-    node_t *z;
+  node_t *x;
+  node_t *y;
+  node_t *z;
 
-    x = (node_t *)malloc(sizeof(node_t));
-    x->value = 1;
-    y = (node_t *)malloc(sizeof(node_t));
-    y->value = 2;
-    z = (node_t *)malloc(sizeof(node_t));
-    z->value = 3;
+  x = (node_t *)malloc(sizeof(node_t));
+  x->value = 1;
+  y = (node_t *)malloc(sizeof(node_t));
+  y->value = 2;
+  z = (node_t *)malloc(sizeof(node_t));
+  z->value = 3;
 
-    x->next = y;
-    y->next = z;
-    z->next = x;
+  x->next = y;
+  y->next = z;
+  z->next = x;
 
-    return x;
+  return x;
+}
 
-    //Allocate three pointers: 
-    //x for the first Node, and temporary pointers y and z for the other two Nodes.
-
-    //Allocate three Node pointees and store references to them in the three pointers.
-
-    //Dereference each pointer to store the appropriate number into the value field in its pointee.
-
-    //Dereference each pointer to access the .next field in its pointee, 
-    //and use pointer assignment to set the .next field to point to the appropriate Node. 
-
+void dealloc(node_t * x) {
+  free(x->next->next);
+  free(x->next);
+  free(x);
 }
 
 //You can ignore the following code for testing
@@ -53,9 +48,12 @@ int dump_all(node_t * x) {
     printf("%d -> %d\n", y->value, z->value);
     if(z->next != x) {
     	printf("failed");
-	return -1;
+      dealloc(x);
+	  return -1;
     } else {
         printf("%d -> %d\n", z->value, x->value);
+        dealloc(x);
         return 0;
     }
 }
+
