@@ -16,12 +16,12 @@ void swap(char * str1, char * str2) {
     char * temp;
     if(len1mlen2 >= 0) { 
       longestLen = strlen1;
-      shortestLen = strlen2;
+      //shortestLen = strlen2;
       temp = (char *)malloc(strlen1);
     }
     else {
       longestLen = strlen2;
-      shortestLen = strlen1;
+      //shortestLen = strlen1;
       temp = (char *)malloc(strlen2);
     }
 
