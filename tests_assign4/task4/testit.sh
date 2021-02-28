@@ -39,4 +39,3 @@ echo -e "${GREEN}********Starting Valgrind Test on ${executable}***************$
 		
 		echo -e "${GREEN}*****Passed Valgrind Test!****${NC}"
 	fi
-

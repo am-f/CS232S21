@@ -27,7 +27,7 @@ node_t * construct_3_strs() {
   *(y->value+2) = '\0';
 
   z = (node_t *)malloc(sizeof(node_t));
-  z->value = (char *)malloc(sizeof(8));
+  z->value = (char *)malloc(8);
   *(z->value) = 'a';
   *(z->value+1) = 'w';
   *(z->value+2) = 'e';
@@ -56,24 +56,23 @@ void dealloc(node_t * x) {
 //You can ignore the following code for testing
 int dump_all(node_t*);
 int main (int argc, char ** argv) {
-    node_t * x = construct_3_strs();
-    return dump_all(x);
-
+  node_t * x = construct_3_strs();
+  return dump_all(x);
 }
 
 int dump_all(node_t * x) {
-    printf("x -> %s", x->value);
-    node_t * y = x->next;
-    printf(" %s", y->value);
-    node_t * z = y->next;
-    printf(" %s\n", z->value);
-    if(z->next != x) {
-    	printf("failed");
+  printf("x -> %s", x->value);
+  node_t * y = x->next;
+  printf(" %s", y->value);
+  node_t * z = y->next;
+  printf(" %s\n", z->value);
+  if(z->next != x) {
+  	printf("failed");
+    dealloc(x);
+	   return -1;
+  } else {
       dealloc(x);
-	    return -1;
-    } else {
-        dealloc(x);
-        return 0;
-    }
+      return 0;
+  }
 }
 
