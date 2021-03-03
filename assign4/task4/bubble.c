@@ -77,7 +77,7 @@ int main()
 {
   char * Strings[NUM];
 
-  printf("Please enter %d strings, one per line:\n", NUM);
+  //printf("Please enter %d strings, one per line:\n", NUM);
   
   for(int i = 0; i < NUM; i++) {
     char bufferString[LEN];
@@ -91,17 +91,21 @@ int main()
     Strings[i] = stringPointer;
   }
 
+/*
   puts("\nHere are the strings in the order you entered:");
   for(int i = 0; i < NUM; i++) {
     puts(*(Strings+i));
   }
+*/
 
   bubbleSort(Strings);
   
-  puts("\nIn alphabetical order, the strings are:");     
+  //puts("\nIn alphabetical order, the strings are:");    
+
   for(int i = 0; i < NUM; i++) {
     puts(*(Strings+i));
   }
+
 
   for(int i = 0; i < NUM; i++) {
     free(*(Strings+i));
