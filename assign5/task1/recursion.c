@@ -3,7 +3,7 @@
 #include <assert.h>
 
 /* both of these routines print and sum up numbers i where start <= i < stop */
-
+/*
 long
 printSumRangeIterative(int start, int stop)
 {
@@ -15,7 +15,7 @@ printSumRangeIterative(int start, int stop)
     }
     return sum;
 }
-
+*/
 long
 printSumRangeRecursive(int start, int stop)
 {
@@ -38,8 +38,8 @@ main(int argc, char **argv)
         return 1;
     }
     int input = atoi(argv[1]);
-    printf("printSumRangeIterative(0, %d)\n", input);
-    printf("sum=%ld\n", printSumRangeIterative(0, input));
+    //printf("printSumRangeIterative(0, %d)\n", input);
+    //printf("sum=%ld\n", printSumRangeIterative(0, input));
     printf("printSumRangeRecursive(0, %d)\n", input);
     printf("sum=%ld\n", printSumRangeRecursive(0, input));
     return 0;
