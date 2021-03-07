@@ -89,6 +89,7 @@ char mystring_get(mystring_t *s, size_t loc) {
 void mystring_delete(mystring_t *s) {
 	free(s->data);
   free(s);
+  return;
 }
 
 int mystring_get_len(mystring_t *s) {
@@ -96,9 +97,9 @@ int mystring_get_len(mystring_t *s) {
 }
 
 char* mystring_get_data(mystring_t *s) {
-	/* YOUR CODE HERE*/
 	return s->data;
 }
+
 void mystring_cat(mystring_t *dest, char *src) {
   int srclen = sizeof(src);
   dest->data = realloc(dest->data, (dest->size + srclen + 1));
