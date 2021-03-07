@@ -1,1 +1,1 @@
-The value of sum in printSumRangeRecursive returned when start == 582 is 330429.  I used the gdb command "b 26 if start == 582" and "p sum" to determine this.
+The value of sum in printSumRangeRecursive returned when start == 582 is 330429.  I used the gdb command "b 28 if start == 582", and once the program hit the breakpoint, the command "p sum" to determine this.

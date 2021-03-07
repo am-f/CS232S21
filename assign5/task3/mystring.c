@@ -60,38 +60,84 @@ mystring_t also_bad_string_new() {
    RIGHT WAY */
 mystring_t *mystring_new() {
 	mystring_t *retval;
-	//YOUR CODE HERE
-	return retval;
+	retval = (mystring_t *)malloc(sizeof(mystring_t));
+  retval->size = 1;
+  
+  retval->data = (char *)malloc((retval->size + 1)*sizeof(char));
+  if (retval->data == NULL) {
+		allocation_failed();
+	}
+
+  retval->data[0] = ' ';
+  retval->data[retval->size] = '\0';
+	
+  return retval;
 }
 
 /* Return the value at the specified location/component "loc" of the mystring */
 char mystring_get(mystring_t *s, size_t loc) {
-	//YOUR CODE HERE
-	return ' ';
+  if(loc >= s->size) {
+    return ' ';
+  }
+	else {
+	  return s->data[loc];
+  }
 }
 
 /* Free up the memory allocated for the passed mystring.
    Remember, you need to free up ALL the memory that was allocated. */
 void mystring_delete(mystring_t *s) {
-	/* YOUR CODE HERE */
+	free(s->data);
+  free(s);
 }
 
 int mystring_get_len(mystring_t *s) {
-	/* YOUR CODE HERE */
+	return s->size;
 }
 
 char* mystring_get_data(mystring_t *s) {
 	/* YOUR CODE HERE*/
 	return s->data;
 }
-void mystring_cat(mystring_t *s, char *s2) {
-	/* YOUR CODE HERE*/
+void mystring_cat(mystring_t *dest, char *src) {
+  int srclen = sizeof(src);
+  dest->data = realloc(dest->data, (dest->size + srclen + 1));
+
+  if (dest->data == NULL) {
+		allocation_failed();
+	}
+  
+  int j = 0;
+  for(int i = dest->size; i < dest->size + srclen; i++) {
+    if(*(src + j) == '\0') {
+      srclen = j;
+      break;
+    }
+    dest->data[i] = *(src + j);
+    j++;
+  }
+
+  dest->size = dest->size + srclen;
+  dest->data[dest->size] = '\0';
+
+  return;
 }
 
 /* Set a value in the mystring. If the extra memory allocation fails, call
    allocation_failed(). Unset space should be value of space */
 void mystring_set(mystring_t *s, size_t loc, char value) {
-	/* YOUR CODE HERE*/
+  if(loc >= s->size) {
+    s->data = realloc(s->data, loc + 2);
+    if (s->data == NULL) {
+		  allocation_failed();
+	  }
+    for(int i = s->size; i < loc; i++) {
+      s->data[i] = ' ';
+    }
+    s->size = loc + 1;
+    s->data[s->size] = '\0';
+  }
+	s->data[loc] = value;
 
 	return;
 }

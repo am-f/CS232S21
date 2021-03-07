@@ -25,9 +25,10 @@ int main(int argc, char **argv) {
 	mystring_set(s, 11, 'a');
 	mystring_set(s, 15, 'z');
 	mystring_set(s, 24, 'm');
-    	mystring_set(s, 500, 's');
+  mystring_set(s, 500, 's');
 	mystring_set(s, 12, 'b');
 	mystring_set(s, 25, '!');
+
 
 	printf("These should be equal:\n");
 	printf("h = %c\n", mystring_get(s, 0));
@@ -50,8 +51,9 @@ int main(int argc, char **argv) {
 	s = mystring_new();
 	mystring_cat(s, "hello ");
 	mystring_cat(s, "world");
+  
 	printf("hello world = %s\n",mystring_get_data(s));
-        mystring_delete(s);
+  mystring_delete(s);
 
 	printf("Test complete.\n");
 	
