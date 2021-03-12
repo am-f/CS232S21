@@ -1,0 +1,10 @@
+every week, cached access code will expire, and you'll have to re-enter your github login info.
+first, run command: 
+  git config credential.helper cache
+second, run command: 
+  git config credential.helper 'cache --timeout=604800'
+third, push or pull to/from myrepo main and re-enter login info (with token below) when prompted
+
+github token (which definitely isn't supposed to be hardcoded here for security reasons but ¯\_(ツ)_/¯): 353194df33dec23f049db38bf7d191d3fe57688b
+
+provides access to the following scopes: admin:org, admin:public_key, admin:repo_hook, notifications, repo, user, workflow, write:discussion, write:packages

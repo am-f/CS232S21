@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void clear1(int array[], int size) {
   for(int i = 0; i < size; i++) {
@@ -18,17 +19,28 @@ void clear3(int *array, int size) {
   while(array < arrayend) *array++ = 0;
 }
 
+void swap(char ** arr1, char ** arr2) {
+	char * temp = *arr1;
+	*arr1 = *arr2;
+	*arr2 = temp;
+  }
+
 void print(int array[], int size) {
   for(int i = 0; i < size; i++) {
     printf("%d  ", array[i]);
   }
   printf("\n");
 }
+void printstr(char * arr) {
+  printf("%s\n", arr);
+}
 
-void printAll(int array1[], int array2[], int array3[], int size) {
+void printAll(int array1[], int array2[], int array3[], char array4[], char array5[], int size) {
   print(array1, size);
   print(array2, size);
   print(array3, size);
+  printstr(array4);
+  printstr(array5);
   printf("\n");
 }
 
@@ -41,14 +53,20 @@ int main(void) {
   int array1[] = {1, 2, 3, 4};
   int array2[] = {1, 2, 3, 4};
   int array3[] = {1, 2, 3, 4};
+  char array4[] = "abcd";
+  char array5[] = "efgh";
+  char * a4 = array4;
+  char * a5 = array5;
+  
   int size = 4;
   int * psize = &size;
   int * memtest = (int *) malloc(sizeof(int) * 8);
-  printAll(array1, array2, array3, size);
-  clear1(array1, size);
-  clear2(array2, size);
-  clear3(array3, size);
-  printAll(array1, array2, array3, size);
+  printAll(array1, array2, array3, array4, array5, size);
+  swap(a4, a5);
+  //clear1(array1, size);
+  //clear2(array2, size);
+  //clear3(array3, size);
+  printAll(array1, array2, array3, array4, array5, size);
   
 /*
   int i = 0;
