@@ -23,7 +23,7 @@
  * 1. Change the doubly linked list to singly linked list.
  * 2. Remove the counter in the list structure.
  * 3. Add the following functions
- *   a. slist_traverse()
+ *   a. sstruct slistraverse()
  *   b. slist_find()
  * Revised by Jun Yuan
  *   Add  slist_delete();
@@ -35,6 +35,7 @@
 
 #include <stdint.h>
 #include "snode.h"
+
 struct slist;
 
 /**
@@ -100,4 +101,4 @@ uint32_t slist_length(struct slist *l);
 void slist_delete(struct slist *l, char *str);
 
 
-#endif /* _slist_H_ */
+#endif // _slist_H_

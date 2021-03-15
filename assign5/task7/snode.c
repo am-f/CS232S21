@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "snode.h"
 #include <string.h>
 #include <stdlib.h>
+#include "snode.h"
 
 struct snode {
   //TODO: change str to dynamic allcoation
