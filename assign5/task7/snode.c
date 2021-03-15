@@ -3,6 +3,11 @@
 #include <stdlib.h>
 #include "snode.h"
 
+struct snode {
+  char * str;
+  struct snode *next;
+};
+
 struct snode * snode_create(char *s) 
 {
   struct snode * newNode = (struct snode *)malloc(sizeof(struct snode));
