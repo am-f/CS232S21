@@ -5,11 +5,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct snode;
-//TODO: change prototypes of functions to remove
-//length
-struct snode *snode_create(char *s) ; 
-void snode_destroy(struct snode * s) ;
+struct snode {
+  char * str;
+  struct snode *next;
+};
+
+struct snode * snode_create(char *s) ; 
+void snode_destroy(struct snode* s) ;
  
 
-#endif /* _snode_H_ */
+#endif //_snode_H_

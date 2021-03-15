@@ -71,11 +71,6 @@ void slist_traverse(struct slist *l) {
   }
 }
 
-/**
- * Returns the number of elements in the list (nodes).
- *
- * @param l pointer to the list (non-NULL)
- */
 uint32_t slist_length(struct slist *l) {
   uint32_t length = 0;
   struct snode * node = l->front;
@@ -85,12 +80,7 @@ uint32_t slist_length(struct slist *l) {
   }
   return length;
 }
-/**
- * Deletes the first snode with the given string.
- *  
- * @param l pointer to the list (non-NULL)
- * @parap str pointer to a string
- */
+
 void slist_delete(struct slist *l, char *str) {
   struct snode * finger = l->front;
   struct snode * pre = l->front;
