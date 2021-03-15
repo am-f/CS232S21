@@ -35,11 +35,7 @@
 
 #include <stdint.h>
 #include "snode.h"
-
-struct slist {
-  struct snode *front; // front node
-  struct snode *back;  // back node
-};
+struct slist;
 
 /**
  * Allocates new slist dynamically.
