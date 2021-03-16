@@ -10,16 +10,18 @@ int main(void)   {
 
     song_list = slist_create();
 
-    slist_add_back(song_list, "Thinking Out Loud");
-    slist_add_back(song_list, "See You Again");
-    slist_add_back(song_list, "Trap Queen");
-    slist_add_back(song_list, "Sugar");
-    slist_add_back(song_list, "Shut Up and Dance");
-    slist_add_back(song_list, "Blank Space");
-    slist_add_back(song_list, "Watch Me");
-    slist_add_front(song_list, "Uptown Funk");
-    slist_add_back(song_list, "Earned It");
-    slist_delete(song_list, "Sugar");
+    slist_add_back(song_list, "Thinking Out Loud", sizeof("Thinking Out Loud"));
+    slist_add_back(song_list, "See You Again", sizeof("See You Again"));
+    slist_add_back(song_list, "Trap Queen", sizeof("Trap Queen"));
+    slist_add_back(song_list, "Sugar", sizeof("Sugar"));
+    slist_add_back(song_list, "Shut Up and Dance", sizeof("Shut Up and Dance"));
+    slist_add_back(song_list, "Blank Space", sizeof("Blank Space"));
+    slist_add_back(song_list, "Watch Me", sizeof("Watch Me"));
+    slist_add_front(song_list, "Uptown Funk", sizeof("Uptown Funk"));
+    slist_add_back(song_list, "Earned It", sizeof("Earned It"));
+    printf("predelete\n");
+    slist_traverse(song_list);
+    slist_delete(song_list, "Sugar", sizeof("Sugar"));
     printf("Here are the top %d songs:\n", slist_length(song_list));
 
     printf("Content of the list as follows.\n");
