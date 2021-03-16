@@ -15,6 +15,5 @@ struct snode {
 struct snode * snode_create(void * data, int size); 
 
 void snode_destroy(struct snode* s);
- 
 
 #endif //_snode_H_

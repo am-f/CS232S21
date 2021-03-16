@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "snode.h"
 
 struct slist;
@@ -25,6 +24,5 @@ void slist_traverse(struct slist *l);
 uint32_t slist_length(struct slist *l);
 
 void slist_delete(struct slist *l, void * data, int size);
-
 
 #endif // _slist_H_
