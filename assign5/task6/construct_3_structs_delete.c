@@ -44,8 +44,6 @@ node_t * setup() {
 }
 
 void teardown(node_t * head) {
-  //free(head->next->next->next);
-  //free(head->next->next);
   free(head->next);
   free(head);
 }
@@ -61,8 +59,8 @@ void add(node_t ** head, char * str, int length){
   (*head)->str[i] = '\0';
   (*head)->length = length;
   (*head)->next = temp;
-
 }
+
 void delete_node_at(node_t ** head, int idx) {
   node_t * node = *head;
   node_t * before = *head;
@@ -89,6 +87,7 @@ int equalStrings(node_t * node, char * delKey) {
   }
   return 1;
 }
+
 void delete_node_key(node_t **head, char * key) {
   node_t * node = *head;
   node_t * before = *head;
@@ -110,7 +109,6 @@ void delete_node_key(node_t **head, char * key) {
     free(node);
   }
 }
-
 
 void dump_all(node_t*);
 int main (int argc, char ** argv) {

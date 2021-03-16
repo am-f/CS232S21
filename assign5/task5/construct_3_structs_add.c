@@ -61,24 +61,24 @@ void add(node_t ** head, char * str, int length){
   (*head)->str[i] = '\0';
   (*head)->length = length;
   (*head)->next = temp;
-
-}
-
-void dump_all(node_t*);
-int main (int argc, char ** argv) {
-    node_t * head = setup();
-    add(&head, "hi", 2);
-    dump_all(head);
-    teardown(head);
-    return 0;
 }
 
 void dump_all(node_t * head) {
-    printf("head -> ");
-    node_t * cur = head;
-    while(cur != NULL) {
-        printf("%s ", cur->str);
-	cur = cur->next;
-    }
-    printf("\ndone\n ");
+  printf("head -> ");
+  node_t * cur = head;
+  while(cur != NULL) {
+    printf("%s ", cur->str);
+	  cur = cur->next;
+  }
+  printf("\ndone\n ");
 }
+
+int main (int argc, char ** argv) {
+  node_t * head = setup();
+  add(&head, "hi", 2);
+  dump_all(head);
+  teardown(head);
+  return 0;
+}
+
+

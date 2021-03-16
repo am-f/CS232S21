@@ -16,5 +16,5 @@ void snode_destroy(struct snode * s)
 {
   free(s->str);
   free(s);
-};
+}
  
