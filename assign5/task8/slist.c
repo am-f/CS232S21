@@ -1,3 +1,8 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "slist.h"
 #include "snode.h"
 
@@ -13,8 +18,8 @@ struct slist *slist_create() {
   return newList;
 }
 
-struct snode * slist_add_back(struct slist *l, char *str) {
-  struct snode * temp = snode_create(str);
+struct snode * slist_add_back(struct slist *l, void * data, int size) {
+  struct snode * temp = snode_create(data, size);
   if(l->front == NULL) {
     l->front = temp;
     l->back = temp;
@@ -26,8 +31,8 @@ struct snode * slist_add_back(struct slist *l, char *str) {
   return l->back;
 }
 
-struct snode * slist_add_front(struct slist *l, char *str) {
-  struct snode * temp = snode_create(str);
+struct snode * slist_add_front(struct slist *l, void * data, int size) {
+  struct snode * temp = snode_create(data, size);
   if(l->front == NULL) {
     l->front = temp;
     l->back = temp;
@@ -39,13 +44,31 @@ struct snode * slist_add_front(struct slist *l, char *str) {
   return l->front;
 }
 
-struct snode* slist_find(struct slist *l, char *str) {
+int voidComp(struct snode * finger, void * data, int dataSize) { //returns 1 if *(finger->data) has same content as *data; returns 0 if not
+  if(finger->size != dataSize) {
+    return 0;
+  }
+  else {
+    uint8_t * fingertemp = (uint8_t *)finger->data;
+    uint8_t * datatemp = (uint8_t *)data;
+    for(int i = 0; i < finger->size; i++) {
+      if(*(fingertemp + i) != *(datatemp + i)) {
+        return 0;
+      }
+    }
+    return 1;
+  }
+}
+
+struct snode* slist_find(struct slist *l, void * data, int dataSize) {
   struct snode * finger = l->front;
-  while(strcmp(finger->str, str) != 0) {
+  int comp = voidComp(finger, data, dataSize);
+  while(comp != 1) {
     finger = finger->next; 
     if(finger == NULL) {
       return NULL;
     }
+    comp = voidComp(finger, data, dataSize);
   }
   return finger;
 }
@@ -62,11 +85,10 @@ void slist_destroy(struct slist *l) {
   free(l);
 }
 
-
 void slist_traverse(struct slist *l) {
   struct snode * node = l->front;
   while(node != NULL) {
-    printf("%s\n", node->str);
+    printf("%s\n", (char *)node->data);
     node = node->next;
   }
 }
@@ -81,21 +103,21 @@ uint32_t slist_length(struct slist *l) {
   return length;
 }
 
-void slist_delete(struct slist *l, char *str) {
+void slist_delete(struct slist *l, void * data, int dataSize) {
   struct snode * finger = l->front;
   struct snode * pre = l->front;
-  int comp = strcmp(finger->str, str);
-  if(comp == 0) {
+  int comp = voidComp(finger, data, dataSize);
+  if(comp == 1) {
     l->front = finger->next;
     snode_destroy(finger);
   }
   else {
     finger = finger->next;
-    comp = strcmp(finger->str, str);
-    while(comp != 0 && finger != NULL) {
+    comp = voidComp(finger, data, dataSize);
+    while(comp != 1 && finger->next != NULL) {
       pre = pre->next;
       finger = finger->next;
-      comp = strcmp(finger->str, str);
+      comp = voidComp(finger, data, dataSize);
     }
     if(finger == l->back) {
       l->back = pre;
@@ -103,5 +125,4 @@ void slist_delete(struct slist *l, char *str) {
     pre->next = finger->next;
     snode_destroy(finger);
   }
-
 }

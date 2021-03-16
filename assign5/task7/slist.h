@@ -1,6 +1,5 @@
 #ifndef _slist_H_
 #define _slist_H_
-
 #include <stdint.h>
 #include "snode.h"
 
