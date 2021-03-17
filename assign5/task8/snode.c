@@ -9,7 +9,7 @@ struct snode * snode_create(void *s, int size) {
   struct snode * newNode = (struct snode *)malloc(sizeof(struct snode));
   newNode->data = malloc(size);
   for(int i = 0; i < size; ) {
-    *(((uint8_t *)newNode->data)+i) = *(((uint8_t * s+i));
+    *(((uint8_t *)newNode->data+i)) = *((uint8_t *)s+i);
     i++;
   }
   newNode->next = NULL;

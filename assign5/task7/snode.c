@@ -6,7 +6,7 @@
 struct snode * snode_create(char *s) 
 {
   struct snode * newNode = (struct snode *)malloc(sizeof(struct snode));
-  newNode->str = malloc(strlen(s) + 1);
+  newNode->str = (char *)malloc(strlen(s) + 1);
   strcpy(newNode->str, s);
   newNode->next = NULL;
 
@@ -16,5 +16,5 @@ void snode_destroy(struct snode * s)
 {
   free(s->str);
   free(s);
-};
+}
  

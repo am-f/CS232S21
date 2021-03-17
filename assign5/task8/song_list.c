@@ -36,5 +36,8 @@ int main(void)   {
     
     slist_destroy(song_list);
 
+
+    deadbeef();
+
     return 0;
 }

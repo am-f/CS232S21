@@ -1,6 +1,5 @@
 CC=gcc
 CFLAGS=-Wall -std=c11 -g
- 
 
 song_list: snode.c snode.h slist.h slist.c song_list.c 
 	$(CC) $(CFLAGS) snode.c slist.c song_list.c -o song_list

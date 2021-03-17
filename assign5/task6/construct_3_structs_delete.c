@@ -4,48 +4,28 @@
 typedef struct snode node_t;
 
 node_t * setup() {
-    node_t * head;
     node_t * node1 = (node_t *)malloc(sizeof(node_t));
     node_t * node2 = (node_t *)malloc(sizeof(node_t));
     node_t * node3 = (node_t *)malloc(sizeof(node_t));
-    head = node1;
+    
+    node_t * head = node1;
 
-    char str1[] = "hello";
-    int i = 0;
-    while(str1[i] != '\0') {
-      *(node1->str+i) = str1[i];
-      i++;
-    }
-    *(node1->str+i) = '\0';
-    node1->length = 5;
+    strcpy(node1->str, "hello");
+    node1->length = strlen("hello");
     node1->next = node2;
 
-    char str2[] = "there";
-    int j = 0;
-    while(str2[j] != '\0') {
-      *(node2->str+j) = str2[j];
-      j++;
-    }
-    *(node2->str+j) = '\0';
-    node2->length = 5;
+    strcpy(node2->str, "there");
+    node2->length = strlen("there");
     node2->next = node3;
 
-    char str3[] = "prof";
-    int k = 0;
-    while(str1[k] != '\0') {
-      *(node3->str+k) = str3[k];
-      k++;
-    }
-    *(node3->str+k) = '\0';
-    node3->length = 4;
+    strcpy(node3->str, "prof");
+    node3->length = strlen("prof");
     node3->next = NULL;
     
    return head;
 }
 
 void teardown(node_t * head) {
-  //free(head->next->next->next);
-  //free(head->next->next);
   free(head->next);
   free(head);
 }
@@ -53,16 +33,11 @@ void teardown(node_t * head) {
 void add(node_t ** head, char * str, int length){
   node_t * temp = *head;
   *head = (node_t *)malloc(sizeof(node_t));
-  int i = 0;
-  while(*(str + i) != '\0') {
-    (*head)->str[i] = *(str + i);
-    i++;
-  }
-  (*head)->str[i] = '\0';
+  strcpy((*head)->str, str);
   (*head)->length = length;
   (*head)->next = temp;
-
 }
+
 void delete_node_at(node_t ** head, int idx) {
   node_t * node = *head;
   node_t * before = *head;
@@ -79,28 +54,19 @@ void delete_node_at(node_t ** head, int idx) {
     free(node);
   }
 } 
-int equalStrings(node_t * node, char * delKey) {
-  int i = 1;
-  while(i < node->length) {
-    if(node->str[i] != *(delKey + i)) {
-      return 0;
-    }
-    i++;
-  }
-  return 1;
-}
+
 void delete_node_key(node_t **head, char * key) {
   node_t * node = *head;
   node_t * before = *head;
-  int comp = equalStrings(node, key);
-  if(comp == 1) {
+  int comp = strcmp(node->str, key);
+  if(comp == 0) {
     *head = (*head)->next;
     free(node);
   }
   else {
-    while(comp == 0) {
-      comp = equalStrings(before->next, key);
-      if(comp == 1) {
+    while(comp != 0) {
+      comp = strcmp(before->next->str, key);
+      if(comp == 0) {
         break;
       }
       before = before->next;
@@ -110,7 +76,6 @@ void delete_node_key(node_t **head, char * key) {
     free(node);
   }
 }
-
 
 void dump_all(node_t*);
 int main (int argc, char ** argv) {

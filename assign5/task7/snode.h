@@ -7,11 +7,11 @@
 
 struct snode {
   char * str;
-  struct snode *next;
+  struct snode * next;
 };
 
-struct snode * snode_create(char *s) ; 
-void snode_destroy(struct snode* s) ;
- 
+struct snode * snode_create(char * s) ; 
+
+void snode_destroy(struct snode * s) ;
 
 #endif //_snode_H_

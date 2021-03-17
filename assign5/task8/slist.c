@@ -126,3 +126,9 @@ void slist_delete(struct slist *l, void * data, int dataSize) {
     snode_destroy(finger);
   }
 }
+
+void deadbeef() {
+  printf("\n ..................\n |     /)  (\\     |\n |.-._((,~~.))_.-,|\n | `-.  X  X  ,-\' |\n |   / ,o--o. \\   |\n |  ( ( .--. ) )  |\n |   ) `----\' (   |\n |  /   i am   \\  |\n | /  deadbeef  \\ |\n |/..............\\|\n\n\n");
+  //adapted from: http://www.asciiworld.com/-Cows-.html
+  return;
+}
