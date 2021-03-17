@@ -128,7 +128,8 @@ void slist_delete(struct slist *l, void * data, int dataSize) {
 }
 
 void deadbeef() {
-  printf("\n ..................\n |     /)  (\\     |\n |.-._((,~~.))_.-,|\n | `-.  X  X  ,-\' |\n |   / ,o--o. \\   |\n |  ( ( .--. ) )  |\n |   ) `----\' (   |\n |  /   i am   \\  |\n | /  deadbeef  \\ |\n |/..............\\|\n\n\n");
+  printf("\n ..................\n |     /)  (\\     |\n |.-._((,~~.))_.-,|\n | `-.  X  X  ,-\' |\n |   / ,o--o. \\   |\n |  ( ( .--. ) )  |\n |   ) `----\' (   |\n |  /   i am   \\  |\n | /  deadbeef  \\ |\n |/..............\\|\n\n");
   //adapted from: http://www.asciiworld.com/-Cows-.html
+  printf("enjoy your weekend! :)\n\n");
   return;
 }
