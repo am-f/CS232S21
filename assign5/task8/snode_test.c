@@ -34,6 +34,10 @@ int main(int argc, char *argv[]) {
 
     p = p->next;
   }
+
+snode_destroy(n1);
+snode_destroy(n2);
+snode_destroy(n3);
   
 
   return 0;

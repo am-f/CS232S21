@@ -27,10 +27,13 @@ int main(int argc, char *argv[]) {
   p = n1;
 
   while (p != NULL) {
-
     printf("str: %s - length: %d\n", p->str, (int)strlen(p->str));
     p = p->next;
   }
+  
+  snode_destroy(n1);
+  snode_destroy(n2);
+  snode_destroy(n3);
 
   return 0;
 }
