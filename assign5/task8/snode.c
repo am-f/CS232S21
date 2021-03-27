@@ -5,6 +5,7 @@
 
 #include "snode.h"
 
+
 struct snode * snode_create(void *s, int size) {
   struct snode * newNode = (struct snode *)malloc(sizeof(struct snode));
   newNode->data = malloc(size);

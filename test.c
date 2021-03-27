@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+/*
 void clear1(int array[], int size) {
   for(int i = 0; i < size; i++) {
     array[i] = 0;
@@ -44,12 +44,16 @@ void printAll(int array1[], int array2[], int array3[], char array4[], char arra
   printf("\n");
 }
 
-
+*/
 /*
 gcc -std=c11 -Wall -g test.c && ./a.out
 */
 int main(void) {
+  int a = 2147483647;
+  int b = 2147483647;
+  printf("%d", (int)(a + b));
   
+  /*
   int array1[] = {1, 2, 3, 4};
   int array2[] = {1, 2, 3, 4};
   int array3[] = {1, 2, 3, 4};
@@ -67,7 +71,7 @@ int main(void) {
   //clear2(array2, size);
   //clear3(array3, size);
   printAll(array1, array2, array3, array4, array5, size);
-  
+  */
 /*
   int i = 0;
   char ch = 'm';
