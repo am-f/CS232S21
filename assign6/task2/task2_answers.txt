@@ -1,0 +1,67 @@
+
+ZX	NX	ZY	NY	f	no
+0	1	0	0	1	1
+
+input X = 9
+input Y = 5 
+
+Steps:
+
+ZX-select16
+	d0 = X = 0x0009
+	d1 = 0x0000
+	 s = ZX = 0
+   ZX-output = 0x0009
+
+
+NX-select16
+	d0 = ZX-output = 0x0009
+	d1 = ZX-output inverted = 0xfff6
+	 s = NX = 1
+   X-output = 0xfff6
+
+
+ZY-select16
+	d0 = Y = 0x0005
+	d1 = 0x0000
+	 s = ZY = 0
+   ZY-output = 0x0005
+
+
+NY-select16
+	d0 = ZY-output = 0x0005
+	d1 = ZY-output inverted = 0xfffa
+	 s = NY = 0
+   Y-output = 0x0005
+
+X-and-Y
+	a = X-output = 0xfff6
+	b = Y-output = 0x0005
+   X-and-Y-output = 0x0004
+
+X-add-Y
+	a = X-output = 0xfff6
+	b = Y-output = 0x0005
+   X-add-Y-output = 0xfffb
+
+f-select16
+	d0 = X-and-Y-output = 0x0004
+	d1 = X-add-Y-output = 0xfffb
+	 s = f = 1
+   f-output = 0xfffb
+
+no-select16
+	d0 = f-output = 0xfffb
+	d1 = f-output inverted = 0x0004
+	 s = no = 1
+   no-output = 0x0004
+
+
+final output: 4 
+
+
+	
+
+
+
+
