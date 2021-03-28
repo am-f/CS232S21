@@ -4,34 +4,58 @@
 typedef struct snode node_t;
 
 node_t * setup() {
-    //TODO:copy setup func from task1
+    node_t * node1 = (node_t *)malloc(sizeof(node_t));
+    node_t * node2 = (node_t *)malloc(sizeof(node_t));
+    node_t * node3 = (node_t *)malloc(sizeof(node_t));
+    
+    node_t * head = node1;
+
+    strcpy(node1->str, "hello");
+    node1->length = strlen("hello");
+    node1->next = node2;
+
+    strcpy(node2->str, "there");
+    node2->length = strlen("there");
+    node2->next = node3;
+
+    strcpy(node3->str, "prof");
+    node3->length = strlen("prof");
+    node3->next = NULL;
+    
+   return head;
 }
 
-void teardown(/*what parameter?*/) {
-    //TODO: free all dynamic memory you requested.
-    //Please complete the prototype of teardown.
-    //You are not allowed to use globals
+void teardown(node_t * head) {
+  free(head->next->next->next);
+  free(head->next->next);
+  free(head->next);
+  free(head);
 }
 
 void add(node_t ** head, char * str, int length){
-    //TODO: implement add to add a new node to front, pointed by head
-}
-
-void dump_all(node_t*);
-int main (int argc, char ** argv) {
-    node_t * head = setup();
-    add(&head, "hi", 2);
-    dump_all(head);
-    teardown(/*what argument?*/);
-    return 0;
+  node_t * temp = *head;
+  *head = (node_t *)malloc(sizeof(node_t));
+  strcpy((*head)->str, str);
+  (*head)->length = length;
+  (*head)->next = temp;
 }
 
 void dump_all(node_t * head) {
-    printf("head -> ");
-    node_t * cur = head;
-    while(cur != NULL) {
-        printf("%s ", cur->str);
-	cur = cur->next;
-    }
-    printf("\ndone\n ");
+  printf("head -> ");
+  node_t * cur = head;
+  while(cur != NULL) {
+    printf("%s ", cur->str);
+	  cur = cur->next;
+  }
+  printf("\ndone\n ");
 }
+
+int main (int argc, char ** argv) {
+  node_t * head = setup();
+  add(&head, "hi", 2);
+  dump_all(head);
+  teardown(head);
+  return 0;
+}
+
+

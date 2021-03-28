@@ -12,11 +12,11 @@ int main(int argc, char *argv[]) {
   // create snodes
   // TODO: modify func calls to snode_create
   // to match with new prototypes.
-  n1 = snode_create("hello");
-  n2 = snode_create("there");
-  n3 = snode_create("prof");
+  
+  n1 = snode_create("hello", sizeof("hello"));
+  n2 = snode_create("there", sizeof("there"));
+  n3 = snode_create("prof", sizeof("prof"));
 
-  printf("snode_test running...\n");
 
   // manually "link" the nodes together.
   n1->next = n2;
@@ -26,14 +26,19 @@ int main(int argc, char *argv[]) {
   // p points to node n1 initially
   p = n1;
 
+
   while (p != NULL) {
-    printf("str: %s - length: %d\n", p->str, (int)strlen(p->str));
+  
+  
+    printf("str: %s - length: %d\n", (char *)p->data, p->size - 1);
+
     p = p->next;
   }
+
+snode_destroy(n1);
+snode_destroy(n2);
+snode_destroy(n3);
   
-  snode_destroy(n1);
-  snode_destroy(n2);
-  snode_destroy(n3);
 
   return 0;
 }

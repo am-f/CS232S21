@@ -61,6 +61,12 @@ void asciimation_delete(asciimation_t * ascm){
 	// 1. free all the frames, must implement frame_delete first.(why?)
 	// 2. free the vector
 	// 3. free the ascm itself
+  int n = get_num_frames(ascm);
+  for(int i = n; i > 0; i--) {
+    frame_delete(ascm->frames[i]);
+  }
+  free(ascm->frames);
+  free(ascm);
 }
 
 void asciimation_play(asciimation_t * ascm){

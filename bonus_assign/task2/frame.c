@@ -3,8 +3,7 @@
 *
 * This is the frame struct implementation
 *
-******************************************************/
-#include "frame.h"
+******************************************************//#include "frame.h"
 #include <stdlib.h>
 #include <stdio.h>
 static void load_frame(frame_t *f, char *path){
@@ -28,8 +27,24 @@ static void load_frame(frame_t *f, char *path){
 
 	//also keep in mind, the first line is the repetition counter.
 	//f->rep_counter = ...
+  FILE * fp;
+  char * line = NULL;
+  fp = fopen(path, "r");
+  if(fp == NULL) {
+    exit(EXIT_FAILURE);
+  }
+  f->id = getline(&line, &len, fp);
+  f->rep_counter = getline(&line, &len, fp);
+  int i;
+  while((read = getline(&line, &len, fp)) != -1) {
+    for(i = 0; i < *len; i++) {
+      f->content[i] = *(line + i);
+    }
+    f->content[i] = '\n';
+  }
 	return;
 }
+
 
 frame_t * frame_new(char *pathname, int id) {
 	frame_t * f = (frame_t *) malloc(sizeof(frame_t));
