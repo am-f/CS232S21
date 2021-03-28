@@ -9,6 +9,7 @@ int midpoint_A(int x, int y) {
 }
 /*
 int midpoint_B(int x, int y) {
+
   unsigned int xI = (unsigned int)x;
   unsigned int yI = (unsigned int)y;
   int add1 = (unsigned int)x + (unsigned int)y;
