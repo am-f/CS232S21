@@ -1,8 +1,23 @@
 1.What instruction is “int a, b, c, d;” converted to? 
+	main:
+        		pushl %ebp
+        		movl %esp,%ebp
+        		subl $16,%esp
+        		leave
+        		ret
+
+
 
 2.Does “int a, b, c, d;” shrink or grow the stack? How many bytes are allocated on stack for a, b, c, and d? Explain them using instruction from question 1.
+	This line grows the stack.  16 bytes are allocated for these variables.
+		pushl %ebp //pushes the current base pointer (an address) to the top of the stack
+		movl %esp, %ebp //copies the current stack pointer (an address) to the base pointer register %ebp, to become the new base pointer
+		subl $16, %esp //subtracts 16 from the value in %esp (which currently has the same value as %ebp) and stores the sum in %esp, to become the new stack pointer. Now, %ebp points to (contains the address of) the bottom of the new stack frame, %esp points to the top of the new stack frame, and these addresses are 16 bytes apart (since each int takes 4 bytes in 32-bit architecture).
 
 3.What instruction is “b=2;” converted to? How is the address of variable b formed in the instruction?
+	movl $2,-8(%ebp) //%ebp contains the address of the base pointer, which is the bottom of the stack frame. -8(%ebp) is the address 8 bytes less than %ebp. movl puts the value 2 in at spaces referred to by the addresses ebp-8, epb-7, epb-6, and ebp-5, since int takes 4 bytes.
 
 4.Based on the instructions converted from four assignments, can we claim the declaration order determines the allocation order? For instance, a is declared before b, does it mean a is to be allocated before b on stack? Verify your theory by changing the declaration to “int a, c, b, d;”
-
+	Yes, we can claim the declaration order determines the allocation order.  If a is declared before b, a is allocated before b on stack, meaning a has a higher address than b.  When I change the declaration to "int a, c, b, d", now b=2 is converted to
+		movl $2,-12(%ebp)
+indicating it is now 4 bytes higher in the stack (its address is 4 bytes lower) than when it was declared second.
