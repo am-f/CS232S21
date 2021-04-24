@@ -1,4 +1,14 @@
 1.What instructions evaluate “a>6”?
+	cmpl $6,-4(%ebp) 
+
 2.What happens if we delete the “jmp” instruction?
+	If we delete the "jmp" instructio then we would go into the else statement (c -= 2) after the if statement, regardless of the value of a.
+
 3.Can you rewrite the condition with “jg” in place of “jle” without changing semantic of the program? Why or why not?
+	I'm not totally certain what the "semantic of the program" means but, to use jg instead of jle, you need to switch the order of the condition.  You do
+	if(a <= 6) {
+		c -= 2;
+	} else {
+		c += 2;
+	}
 

@@ -1,10 +1,10 @@
 main:
-  pushl %ebp
-  movl %esp,%ebp
-  subl $12,%esp
-  movl $13,-4(%ebp)
-  movl $5,-8(%ebp)
-  movl $0,-12(%ebp)
+  pushl %ebp //push ebp to stack
+  movl %esp,%ebp //copy esp into ebp
+  subl $12,%esp //make esp zzzz-12
+  movl $13,-4(%ebp) //put a=13 into stack
+  movl $5,-8(%ebp) //put b=5 into stack
+  movl $0,-12(%ebp) //put c=0 into stack
   cmpl $6,-4(%ebp)
   jle .L2
   movl $15,-8(%ebp)
