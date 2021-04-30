@@ -1,4 +1,7 @@
+#include <stdio.h>
+#include <string.h>
 char password[8] = "secret";
+
 int main() {
     char input[8];
     printf("please enter your password\n");
@@ -11,3 +14,4 @@ int main() {
     }
 
 }
+
